@@ -55,3 +55,42 @@ html {
     transition: 0.3s;
   }
 }
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 500px;
+
+@media screen and (max-width: $breakpoint-tablet) {
+  .header {
+    height: 66px;
+
+    &__container {
+      width: 90%;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+    &__nav {
+      gap: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .header {
+    height: 56px;
+
+    &__container {
+      width: 90%;
+    }
+
+    &__text {
+      font-size: 14px;
+    }
+
+    &__nav {
+      display: none;
+    }
+  }
+}
