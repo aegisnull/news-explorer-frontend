@@ -1,11 +1,57 @@
-.header {
+html {
   background-color: black;
+}
 
+.header {
+  height: 80px;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   &__container {
     width: 80%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &__nav {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    align-items: center;
+    gap: 45px;
+  }
+
+  &__logo {
+    cursor: pointer;
+  }
+
+  &__text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__link {
+    color: white;
+    cursor: pointer;
+  }
+
+  &__button {
+    padding: 11px 25px;
+    border: 1px solid white;
+    border-radius: 100px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+  }
+
+  &__button:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s;
   }
 }

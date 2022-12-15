@@ -10,8 +10,10 @@ function Header() {
           <img src={Logo} alt="NewsExplorer Logo" />
         </div>
         <nav className="header__nav">
-          <div className="header__link">Inicio</div>
-          <button className="header__button">Iniciar sesión</button>
+          <div className="header__link header__text">Inicio</div>
+          <button className="header__button header__text">
+            Iniciar sesión
+          </button>
         </nav>
       </div>
     </header>
