@@ -3,15 +3,16 @@ import Logo from "../../images/logo.svg";
 
 function Header() {
   return (
-    <header>
-      <div className="header__logo">
-        <img src={Logo} alt="NewsExplorer Logo" />
+    <header className="header">
+      <div className="header__container">
+        <div className="header__logo">
+          <img src={Logo} alt="NewsExplorer Logo" />
+        </div>
+        <nav className="header__nav">
+          <div className="header__link">Inicio</div>
+          <button className="header__button">Iniciar sesión</button>
+        </nav>
       </div>
-      <nav className="header__nav">
-        <ul className="header__nav-list">
-          <li className="header__nav-item">Inicio</li>
-        </ul>
-      </nav>
     </header>
   );
 }
