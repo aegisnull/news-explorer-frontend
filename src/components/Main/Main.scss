@@ -33,6 +33,7 @@ $breakpoint-mobile: 500px;
 @media screen and (max-width: $breakpoint-tablet) {
   .main {
     height: 400px;
+    background-position-x: 40%;
 
     &__container {
       width: 452px;
@@ -50,6 +51,7 @@ $breakpoint-mobile: 500px;
 @media screen and (max-width: $breakpoint-mobile) {
   .main {
     height: 536px;
+    background-position-x: center;
 
     &__container {
       width: 85vw;
