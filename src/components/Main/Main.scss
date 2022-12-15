@@ -1,0 +1,28 @@
+.main {
+  height: 576px;
+  color: white;
+  background-image: url(../../images/main__image.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__container {
+    width: 608px;
+    margin: auto;
+    padding-top: 80px;
+  }
+
+  &__title {
+    font-family: "Roboto-Slab", serif;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 64px;
+    width: 80%;
+  }
+
+  &__subtitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
