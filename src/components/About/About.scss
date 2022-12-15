@@ -1,0 +1,38 @@
+.about {
+  height: 624px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__avatar {
+    width: 464px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 50px;
+  }
+
+  &__info {
+    width: 600px;
+  }
+
+  &__title {
+    font-family: "Roboto-Slab", serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+  }
+
+  &__text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
