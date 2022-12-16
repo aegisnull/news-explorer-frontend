@@ -32,3 +32,39 @@
   &__social {
   }
 }
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 670px;
+
+@media screen and (max-width: $breakpoint-tablet) {
+  .footer {
+    height: 64px;
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .footer {
+    height: 176px;
+    &__container {
+      width: 92vw;
+      flex-direction: column-reverse;
+    }
+    &__copyright {
+      align-self: center;
+      padding-bottom: 22px;
+    }
+    &__nav {
+      justify-content: space-between;
+      padding-bottom: 30px;
+    }
+    &__links {
+      flex-direction: column;
+      gap: 30px;
+      padding-top: 20px;
+    }
+    &__socials {
+      align-self: flex-start;
+      padding-top: 20px;
+    }
+  }
+}
