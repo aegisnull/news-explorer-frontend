@@ -1,0 +1,34 @@
+.footer {
+  height: 80px;
+  &__container {
+    width: 90vw;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Roboto", sans-serif;
+  }
+  &__copyright {
+    font-size: 16px;
+    line-height: 22px;
+    color: #b6bcbf;
+  }
+  &__nav {
+    display: flex;
+    align-items: center;
+  }
+  &__links {
+    display: flex;
+    font-size: 18px;
+    line-height: 24px;
+    gap: 43px;
+    padding-right: 42px;
+  }
+  &__link {
+  }
+  &__socials {
+    display: flex;
+    gap: 27.9px;
+  }
+  &__social {
+  }
+}
