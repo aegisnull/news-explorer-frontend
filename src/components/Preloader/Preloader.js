@@ -1,8 +1,13 @@
 import React from "react";
-import "./Preloader.css";
+import "./Preloader.scss";
 
 function Preloader() {
-  return <i class="circle-preloader"></i>;
+  return (
+    <div className="preloader">
+      <i class="preloader__circle" />
+      <div className="preloader__text">Buscando noticias...</div>
+    </div>
+  );
 }
 
 export default Preloader;
