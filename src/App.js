@@ -1,5 +1,5 @@
 import Main from "./components/Main/Main";
-import SavedNewsHeader from "./components/SavedNewsHeader/SavedNewsHeader";
+import SavedNews from "./components/SavedNews/SavedNews";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/saved-news" element={<SavedNewsHeader />} />
+        <Route path="/saved-news" element={<SavedNews />} />
       </Routes>
     </div>
   );
