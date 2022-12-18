@@ -10,7 +10,9 @@ function SavedNews() {
     <section className="saved-news">
       <Header />
       <SavedNewsHeader />
-      <NewsCardList />
+      <section className="news__container">
+        <NewsCardList />
+      </section>
       <Footer />
     </section>
   );
