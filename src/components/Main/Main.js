@@ -3,6 +3,7 @@ import "./Main.scss";
 import Header from "../Header/Header";
 import About from "../About/About";
 import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
 
 function Main() {
   return (
@@ -15,6 +16,7 @@ function Main() {
             Encuentra las últimas noticias sobre cualquier tema y guárdalas en
             tu cuenta personal.
           </p>
+          <SearchForm />
         </div>
       </section>
       <About />
