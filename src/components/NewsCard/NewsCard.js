@@ -13,7 +13,7 @@ function NewsCard() {
         <p className="card__date"></p>
         <h3 className="card__title"></h3>
         <p className="card__text"></p>
-        <p className="card__pusblisher"></p>
+        <p className="card__publisher"></p>
       </a>
     </article>
   );
