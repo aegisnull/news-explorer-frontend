@@ -35,6 +35,10 @@
   &__link {
     color: white;
     cursor: pointer;
+
+    &_light {
+      color: black;
+    }
   }
 
   &__button {
@@ -44,12 +48,27 @@
     background-color: transparent;
     color: white;
     cursor: pointer;
-  }
 
-  &__button:hover {
-    background-color: white;
-    color: black;
-    transition: 0.3s;
+    &:hover {
+      background-color: white;
+      color: black;
+      transition: 0.3s;
+    }
+
+    &_light {
+      padding: 11px 25px;
+      border: 1px solid black;
+      border-radius: 100px;
+      background-color: transparent;
+      color: black;
+      cursor: pointer;
+
+      &:hover {
+        background-color: black;
+        color: white;
+        transition: 0.3s;
+      }
+    }
   }
 }
 

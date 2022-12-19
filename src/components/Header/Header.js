@@ -8,6 +8,9 @@ import "./Header.scss";
 function Header() {
   const currentPath = useLocation().pathname;
   const logoPath = currentPath === "/saved-news" ? LightLogo : Logo;
+  const textColor = currentPath === "/saved-news" ? "header__link_light" : "";
+  const buttonColor =
+    currentPath === "/saved-news" ? "header__button_light" : "header__button";
 
   return (
     <header className="header">
@@ -16,8 +19,8 @@ function Header() {
           <img src={logoPath} alt="NewsExplorer Logo" />
         </div>
         <nav className="header__nav">
-          <div className="header__link header__text">Inicio</div>
-          <button className="header__button header__text">
+          <div className={`header__link header__text ${textColor}`}>Inicio</div>
+          <button className={`${buttonColor} header__text `}>
             Iniciar sesión
           </button>
         </nav>
