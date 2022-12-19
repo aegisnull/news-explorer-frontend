@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Logo from "../../images/logo.svg";
 import LightLogo from "../../images/logo_light.svg";
 
@@ -15,11 +15,17 @@ function Header() {
   return (
     <header className="header">
       <div className="header__container">
-        <div className="header__logo">
-          <img src={logoPath} alt="NewsExplorer Logo" />
-        </div>
+        <Link to={"/"}>
+          <div className="header__logo">
+            <img src={logoPath} alt="NewsExplorer Logo" />
+          </div>
+        </Link>
         <nav className="header__nav">
-          <div className={`header__link header__text ${textColor}`}>Inicio</div>
+          <Link to={"/"}>
+            <div className={`header__link header__text ${textColor}`}>
+              Inicio
+            </div>
+          </Link>
           <button className={`${buttonColor} header__text `}>
             Iniciar sesión
           </button>
