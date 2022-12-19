@@ -3,6 +3,8 @@ import "./NewsCard.scss";
 import initialNews from "../../utils/placeholderNews";
 
 function NewsCard() {
+  const Cards = document.querySelectorAll(".card");
+
   return (
     <>
       <h1 className="cards-section-title">Resultados de la búsqueda</h1>
@@ -10,6 +12,11 @@ function NewsCard() {
         {initialNews.map((news) => {
           return <Card />;
         })}
+        {Cards.length >= 3 ? (
+          <button className="cards-container__view-more">Ver más</button>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
