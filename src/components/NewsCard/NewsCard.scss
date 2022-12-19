@@ -23,9 +23,8 @@
     margin: 20px 24px 12px;
   }
   &__title {
-    font-family: "Roboto Slab", sans-serif;
-    font-style: normal;
-    font-weight: normal;
+    font-family: "Roboto-Slab", serif;
+    font-weight: 400;
     font-size: 26px;
     line-height: 30px;
     color: #1a1b22;
@@ -33,9 +32,6 @@
     text-overflow: ellipsis;
   }
   &__text {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
     margin: 16px auto;
     overflow: hidden;
     word-wrap: break-word;
@@ -53,25 +49,18 @@
   }
 
   &__publisher {
+    font-family: "Roboto-Slab", sans-serif;
     width: 352px;
     margin: 2px 24px 24px;
-    &-link {
-      display: inline-block;
-      font-family: "Roboto Slab", sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 20px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: #b6bcbf;
-      margin: 0;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      max-width: 100%;
-    }
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #b6bcbf;
   }
+
   &__trash-button {
     border: 0;
     background-color: #fff;
