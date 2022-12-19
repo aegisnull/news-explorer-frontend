@@ -13,12 +13,15 @@ function About() {
         <div className="about__info">
           <h1 className="about__title">Acerca del autor</h1>
           <p className="about__text">
-            Este bloque describe al autor del proyecto. Aquí debe indicar tu
-            nombre, a qué te dedicas y qué tecnologías de desarrollo conoces.
+            Mi nombre es <strong>Luis Tellez</strong>, soy desarrollador web
+            Full Stack (MERN) y me dedico a la creación de sitios web y
+            aplicaciones web. Conocimientos en HTML, CSS, JavaScript, React,
+            Node.js, Express, MongoDB, MySQL, Git, GitHub, Bootstrap, Material
+            UI, entre otras tecnologías.
           </p>
           <p className="about__text">
-            También puedes hablar de tu experiencia con Practicum, de lo que
-            aprendiste allí y de cómo puedes ayudar a los clientes potenciales.
+            Mi experiencia en Practicum fue muy buena, aprendí mucho y me ayudó
+            a mejorar mis habilidades como desarrollador web.
           </p>
         </div>
       </div>
