@@ -1,5 +1,6 @@
 .search-form {
   padding-top: 44px;
+  position: relative;
   &__input {
     width: 608px;
     padding: 21px;
@@ -9,7 +10,11 @@
   }
 
   &__button {
-    padding: 21px;
+    position: absolute;
+    bottom: -1%;
+    right: -8%;
+    height: 65px;
+    width: 170px;
     border-radius: 100px;
     background-color: #2f71e5;
     font-family: "Roboto", sans-serif;
@@ -18,7 +23,6 @@
     line-height: 24px;
     color: white;
     border: none;
-    outline: none;
     cursor: pointer;
   }
 }
