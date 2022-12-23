@@ -4,6 +4,11 @@ import PopupWithForm from "./PopupWithForm";
 import "./PopupWithForm.scss";
 
 function SignInPopup(props) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onSignIn();
+  }
+
   return (
     <PopupWithForm
       name="sign-in"
@@ -12,6 +17,7 @@ function SignInPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onRegister={props.onRegister}
+      onSubmit={handleSubmit}
     >
       <label className="popup__label">
         Correo electrónico

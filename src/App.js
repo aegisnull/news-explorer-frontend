@@ -65,6 +65,7 @@ function App() {
         isOpen={isSignUpPopupOpen}
         onClose={closeAllPopups}
         isRegisterOpen
+        onSuccess={handleSuccessClick}
       />
 
       <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} />

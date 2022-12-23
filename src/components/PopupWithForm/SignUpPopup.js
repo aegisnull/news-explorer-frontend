@@ -4,6 +4,11 @@ import PopupWithForm from "./PopupWithForm";
 import "./PopupWithForm.scss";
 
 function SignUpPopup(props) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onSuccess();
+  }
+
   return (
     <PopupWithForm
       name="sign-up"
@@ -12,6 +17,7 @@ function SignUpPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       isRegisterOpen={props.isRegisterOpen}
+      onSubmit={handleSubmit}
     >
       <label className="popup__label">
         Correo electrónico
