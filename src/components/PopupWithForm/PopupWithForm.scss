@@ -84,4 +84,19 @@
     padding: 0;
     margin: 30px 0 0;
   }
+
+  &__link {
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: block;
+    text-align: center;
+    padding-top: 16px;
+  }
+
+  &__blue {
+    color: #2f71e5;
+  }
 }
