@@ -3,6 +3,7 @@ import SavedNews from "./components/SavedNews/SavedNews";
 import NotFound from "./components/NotFound/NotFound";
 import { Routes, Route } from "react-router-dom";
 import SignInPopup from "./components/PopupWithForm/SignInPopup";
+import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
 import React from "react";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 
   function handleSignUpClick() {
     setSignUpPopupOpen(true);
+    setSignInPopupOpen(false);
   }
 
   function handleSignInClick() {
@@ -45,7 +47,12 @@ function App() {
 
   return (
     <div className="App">
-      <SignInPopup isOpen={isSignInPopupOpen} onClose={closeAllPopups} />
+      <SignInPopup
+        isOpen={isSignInPopupOpen}
+        onClose={closeAllPopups}
+        onRegister={handleSignUpClick}
+      />
+      <SignUpPopup isOpen={isSignUpPopupOpen} onClose={closeAllPopups} />
 
       <Routes>
         <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />

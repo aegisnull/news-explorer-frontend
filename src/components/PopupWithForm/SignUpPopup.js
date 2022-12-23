@@ -3,15 +3,14 @@ import PopupWithForm from "./PopupWithForm";
 
 import "./PopupWithForm.scss";
 
-function SignInPopup(props) {
+function SignUpPopup(props) {
   return (
     <PopupWithForm
-      name="sign-in"
-      title="Iniciar sesión"
-      buttonText="Iniciar sesión"
+      name="sign-up"
+      title="Inscribirse"
+      buttonText="Inscribirse"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      onRegister={props.onRegister}
     >
       <label className="popup__label">
         Correo electrónico
@@ -35,8 +34,19 @@ function SignInPopup(props) {
         />
         <span className="popup__input-error"></span>
       </label>
+      <label className="popup__label">
+        Nombre de usuario
+        <input
+          className="popup__input"
+          type="text"
+          name="username"
+          placeholder="Introduce tu nombre de usuario"
+          required
+        />
+        <span className="popup__input-error"></span>
+      </label>
     </PopupWithForm>
   );
 }
 
-export default SignInPopup;
+export default SignUpPopup;

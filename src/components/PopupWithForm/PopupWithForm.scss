@@ -97,8 +97,11 @@
     font-size: 14px;
     line-height: 17px;
     display: block;
-    text-align: center;
     padding-top: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: auto;
   }
 
   &__blue {

@@ -1,6 +1,5 @@
 import React from "react";
 import "./PopupWithForm.scss";
-import { Link } from "react-router-dom";
 
 function PopupWithForm(props) {
   return (
@@ -26,9 +25,9 @@ function PopupWithForm(props) {
             {props.buttonText}
           </button>
         </form>
-        <Link className="popup__link" to="/signup">
+        <button className="popup__link" onClick={props.onRegister}>
           o <span className="popup__blue">inscribirse</span>
-        </Link>
+        </button>
       </div>
     </div>
   );
