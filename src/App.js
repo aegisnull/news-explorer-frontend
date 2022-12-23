@@ -7,6 +7,11 @@ import React from "react";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
+  const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
+
+  function handleSignUpClick() {
+    setSignUpPopupOpen(true);
+  }
 
   function handleSignInClick() {
     setSignInPopupOpen(true);
@@ -14,6 +19,7 @@ function App() {
 
   function closeAllPopups() {
     setSignInPopupOpen(false);
+    setSignUpPopupOpen(false);
   }
 
   function closeByEsc(evt) {
