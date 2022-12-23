@@ -1,0 +1,20 @@
+.popup {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &__container {
+    width: 430px;
+    height: 380px;
+    background-color: #fff;
+    border-radius: 16px;
+  }
+  &__close-button {
+  }
+  &__title {
+  }
+  &__form {
+  }
+  &__submit-button {
+  }
+}

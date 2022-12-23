@@ -4,9 +4,9 @@ import "./PopupWithForm.scss";
 function PopupWithForm(props) {
   return (
     <div
-      className={`popup popup_type_${props.name} ${
+      className=/* {`popup popup_type_${props.name} ${
         props.isOpen ? "popup_opened" : ""
-      }`}
+      }`} */"popup"
     >
       <div className="popup__container">
         <button
