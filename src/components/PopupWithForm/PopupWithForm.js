@@ -8,7 +8,11 @@ function PopupWithForm(props) {
         props.isOpen ? "popup_active" : ""
       }`}
     >
-      <div className="popup__container">
+      <div
+        className={`popup__container ${
+          props.isRegisterOpen ? "popup__container_register" : ""
+        }`}
+      >
         <button
           className="popup__close-button"
           onClick={props.onClose}

@@ -11,6 +11,7 @@ function SignUpPopup(props) {
       buttonText="Inscribirse"
       isOpen={props.isOpen}
       onClose={props.onClose}
+      isRegisterOpen={props.isRegisterOpen}
     >
       <label className="popup__label">
         Correo electrónico

@@ -21,6 +21,10 @@
     background-color: #fff;
     border-radius: 16px;
     position: relative;
+
+    &_register {
+      height: 458px;
+    }
   }
   &__close-button {
     position: absolute;

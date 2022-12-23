@@ -52,7 +52,11 @@ function App() {
         onClose={closeAllPopups}
         onRegister={handleSignUpClick}
       />
-      <SignUpPopup isOpen={isSignUpPopupOpen} onClose={closeAllPopups} />
+      <SignUpPopup
+        isOpen={isSignUpPopupOpen}
+        onClose={closeAllPopups}
+        isRegisterOpen
+      />
 
       <Routes>
         <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />
