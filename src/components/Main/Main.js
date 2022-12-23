@@ -5,11 +5,11 @@ import About from "../About/About";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 
-function Main() {
+function Main(props) {
   return (
     <>
       <section className="main">
-        <Header />
+        <Header onSignInClick={props.onSignInClick} />
         <div className="main__container">
           <h1 className="main__title">¿Qué está pasando en el mundo?</h1>
           <p className="main__subtitle">

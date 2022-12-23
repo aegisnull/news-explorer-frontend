@@ -3,12 +3,14 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
 import "./PopupWithForm.scss";
 
-function SignInPopup(isOpen, onClose) {
+function SignInPopup(props) {
   return (
     <PopupWithForm
       name="sign-in"
       title="Iniciar sesión"
       buttonText="Iniciar sesión"
+      isOpen={props.isOpen}
+      onClose={props.onClose}
     >
       <label className="popup__label">
         Correo electrónico

@@ -6,12 +6,22 @@ import SignInPopup from "./components/PopupWithForm/SignInPopup";
 import React from "react";
 
 function App() {
+  const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
+
+  function handleSignInClick() {
+    setSignInPopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setSignInPopupOpen(false);
+  }
+
   return (
     <div className="App">
-      <SignInPopup />
+      <SignInPopup isOpen={isSignInPopupOpen} onClose={closeAllPopups} />
 
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />
         <Route path="/saved-news" element={<SavedNews />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

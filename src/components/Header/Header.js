@@ -5,7 +5,7 @@ import LightLogo from "../../images/logo_light.svg";
 
 import "./Header.scss";
 
-function Header() {
+function Header(props) {
   const currentPath = useLocation().pathname;
   const logoPath = currentPath === "/saved-news" ? LightLogo : Logo;
   const textColor = currentPath === "/saved-news" ? "header__link_light" : "";
@@ -26,7 +26,10 @@ function Header() {
               Inicio
             </div>
           </Link>
-          <button className={`${buttonColor} header__text `}>
+          <button
+            className={`${buttonColor} header__text `}
+            onClick={props.onSignInClick}
+          >
             Iniciar sesión
           </button>
         </nav>
