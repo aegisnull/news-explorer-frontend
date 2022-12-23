@@ -9,6 +9,11 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
+  visibility: hidden;
+
+  &_active {
+    visibility: visible;
+  }
 
   &__container {
     width: 430px;

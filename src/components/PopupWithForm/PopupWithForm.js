@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 function PopupWithForm(props) {
   return (
     <div
-      className=/* {`popup popup_type_${props.name} ${
-        props.isOpen ? "popup_opened" : ""
-      }`} */"popup"
+      className={`popup popup-${props.name} ${
+        props.isOpen ? "popup_active" : ""
+      }`}
     >
       <div className="popup__container">
         <button
           className="popup__close-button"
           onClick={props.onClose}
         ></button>
-        
+
         <form
           className="popup__form"
           name={props.name}
@@ -26,7 +26,7 @@ function PopupWithForm(props) {
             {props.buttonText}
           </button>
         </form>
-        <Link className='popup__link' to='/signup'>
+        <Link className="popup__link" to="/signup">
           o <span className="popup__blue">inscribirse</span>
         </Link>
       </div>
