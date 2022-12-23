@@ -1,7 +1,13 @@
 .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &__container {
     width: 430px;
@@ -10,10 +16,20 @@
     border-radius: 16px;
   }
   &__close-button {
+    position: absolute;
   }
   &__title {
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 28px;
+    color: #1a1b22;
+    margin: 0;
+    padding-top: 34px;
   }
   &__form {
+    padding-left: 36px;
+    margin: 0;
   }
   &__submit-button {
   }
