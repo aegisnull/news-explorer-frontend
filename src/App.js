@@ -16,6 +16,27 @@ function App() {
     setSignInPopupOpen(false);
   }
 
+  function closeByEsc(evt) {
+    if (evt.key === "Escape") {
+      closeAllPopups();
+    }
+  }
+
+  function closeByOverlay(evt) {
+    if (evt.target.classList.contains("popup")) {
+      closeAllPopups();
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", closeByEsc);
+    document.addEventListener("click", closeByOverlay);
+    return () => {
+      document.removeEventListener("keydown", closeByEsc);
+      document.removeEventListener("click", closeByOverlay);
+    };
+  });
+
   return (
     <div className="App">
       <SignInPopup isOpen={isSignInPopupOpen} onClose={closeAllPopups} />
