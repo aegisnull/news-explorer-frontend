@@ -5,8 +5,6 @@ import About from "../About/About";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 
-import SignInPopup from "../PopupWithForm/SignInPopup";
-
 function Main() {
   return (
     <>
@@ -23,7 +21,6 @@ function Main() {
       </section>
       <About />
       <Footer />
-      <SignInPopup />
     </>
   );
 }
