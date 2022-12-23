@@ -25,6 +25,10 @@
     &_register {
       height: 458px;
     }
+
+    &_success {
+      height: 182px;
+    }
   }
   &__close-button {
     position: absolute;
@@ -47,6 +51,11 @@
     color: #1a1b22;
     margin: 0;
     padding-top: 34px;
+
+    &_success {
+      width: 315px;
+      padding-left: 36px;
+    }
   }
   &__form {
     padding-left: 36px;
@@ -92,6 +101,14 @@
     color: #2f71e5;
     padding: 0;
     margin: 30px 0 0;
+
+    &_success {
+      display: block;
+      padding-left: 36px;
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 22px;
+    }
   }
 
   &__link {

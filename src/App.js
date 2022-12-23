@@ -4,14 +4,22 @@ import NotFound from "./components/NotFound/NotFound";
 import { Routes, Route } from "react-router-dom";
 import SignInPopup from "./components/PopupWithForm/SignInPopup";
 import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
+import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
+  const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
 
   function handleSignUpClick() {
     setSignUpPopupOpen(true);
+    setSignInPopupOpen(false);
+  }
+
+  function handleSuccessClick() {
+    setSuccessPopupOpen(true);
+    setSignUpPopupOpen(false);
     setSignInPopupOpen(false);
   }
 
@@ -22,6 +30,7 @@ function App() {
   function closeAllPopups() {
     setSignInPopupOpen(false);
     setSignUpPopupOpen(false);
+    setSuccessPopupOpen(false);
   }
 
   function closeByEsc(evt) {
@@ -57,6 +66,8 @@ function App() {
         onClose={closeAllPopups}
         isRegisterOpen
       />
+
+      <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} />
 
       <Routes>
         <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />
