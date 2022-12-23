@@ -11,21 +11,23 @@ function SignInPopup(isOpen, onClose) {
       buttonText="Iniciar sesión"
     >
       <label className="popup__label">
+        Correo electrónico
         <input
           className="popup__input"
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Introduce tu correo electrónico"
           required
         />
         <span className="popup__input-error"></span>
       </label>
       <label className="popup__label">
+        Contraseña
         <input
           className="popup__input"
           type="password"
           name="password"
-          placeholder="Contraseña"
+          placeholder="Introduce tu contraseña"
           required
         />
         <span className="popup__input-error"></span>
