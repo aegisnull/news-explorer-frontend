@@ -1,6 +1,7 @@
 import React from "react";
 import "./NewsCard.scss";
 import { NewsContext } from "../../contexts/NewsContext";
+import { useLocation } from "react-router-dom";
 
 function NewsCard() {
   const Cards = document.querySelectorAll(".card");
@@ -35,10 +36,16 @@ function NewsCard() {
 }
 
 function Card(props) {
+  const currentPath = useLocation().pathname;
+
   return (
     <article className="card">
       <button className="card__save-button" />
-      <button className="card__trash-button" />
+      {currentPath === "/saved-news" ? (
+        <button className="card__trash-button" />
+      ) : (
+        ""
+      )}
       <button className="card__keyword-button"></button>
       <button className="card__hover-text">
         Inicia sesión para guardar artículos
