@@ -10,7 +10,7 @@ function NewsCard() {
     <>
       <h1 className="cards-section-title">Resultados de la búsqueda</h1>
       <div className="cards-container">
-        {news.map((news) => {
+        {news.map((news, index) => {
           return (
             <Card
               title={news.title}
@@ -19,6 +19,7 @@ function NewsCard() {
               publishedAt={news.publishedAt}
               content={news.content}
               source={news.source.name}
+              key={index}
             />
           );
         })}
@@ -42,7 +43,6 @@ function Card(props) {
       <button className="card__hover-text">
         Inicia sesión para guardar artículos
       </button>
-
       <a
         href={props.url}
         target="_blank"
