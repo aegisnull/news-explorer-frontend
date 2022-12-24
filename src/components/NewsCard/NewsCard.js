@@ -1,10 +1,9 @@
 import React from "react";
 import "./NewsCard.scss";
-//import initialNews from "../../utils/placeholderNews";
 import { NewsContext } from "../../contexts/NewsContext";
 
 function NewsCard() {
-  //const Cards = document.querySelectorAll(".card");
+  const Cards = document.querySelectorAll(".card");
   const news = React.useContext(NewsContext);
 
   console.log(news);
@@ -26,14 +25,11 @@ function NewsCard() {
           );
         })}
 
-        {/* {initialNews.map((news) => {
-          return <Card />;
-        })}
         {Cards.length >= 3 ? (
           <button className="cards-container__view-more">Ver más</button>
         ) : (
           ""
-        )} */}
+        )}
       </div>
     </>
   );
