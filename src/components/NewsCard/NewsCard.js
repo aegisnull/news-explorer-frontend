@@ -6,8 +6,6 @@ function NewsCard() {
   const Cards = document.querySelectorAll(".card");
   const news = React.useContext(NewsContext);
 
-  console.log(news);
-
   return (
     <>
       <h1 className="cards-section-title">Resultados de la búsqueda</h1>
