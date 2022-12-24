@@ -72,11 +72,13 @@
     line-height: 30px;
     color: #1a1b22;
     text-overflow: ellipsis;
+    overflow: hidden;
     margin: 0;
   }
 
   &__text {
     text-overflow: ellipsis;
+    overflow: hidden;
     word-wrap: break-word;
     width: 352px;
     height: 88px;
