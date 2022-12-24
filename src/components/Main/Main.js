@@ -4,8 +4,19 @@ import Header from "../Header/Header";
 import About from "../About/About";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
+import getNews from "../../utils/NewsApi";
 
 function Main(props) {
+  React.useEffect(() => {
+    getNews("japan")
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <section className="main">

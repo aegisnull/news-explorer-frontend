@@ -1,56 +1,27 @@
-import {
-  PAGE_SIZE,
-  SEARCH_INTERVAL,
-  API_KEY,
-  NEWS_URL,
-  PROXY_URL,
-} from "./config";
+// Constants declaration
+const NEWS_URL = "https://newsapi.org/v2";
+const PROXY_URL = "https://nomoreparties.co/news/v2";
+const API_KEY = "ed4390ffc54146c7a2ff5ea1673c8b01";
 
-class NewsApi {
-  constructor(options) {
-    this.headers = options.headers;
-    this._apiKey = options.apiKey;
-    this._today = options.today;
-    this._lastWeek = options.lastWeek;
-    this._newsUrl = options.newsUrl;
-    this._proxy = options.proxy;
-    this._pageSize = options.pageSize;
-    this._endpoint = options.endpoint;
-  }
-
-  search(keyword) {
-    return fetch(
-      `${this._proxy}` +
-        `${this._endpoint}` +
-        `q=${keyword}&` +
-        `apiKey=${this._apiKey}&` +
-        `from=${this._lastWeek.toISOString()}&` +
-        `to=${this._today.toISOString()}&` +
-        `pageSize=${this._pageSize}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
+// Function to get news
+function getNews(keyword) {
+  return fetch(
+    `${PROXY_URL}/everything?q=${keyword}&from=${new Date(
+      Date.now() - 7 * 24 * 3600 * 1000
+    ).toISOString()}&to=${new Date().toISOString()}&pageSize=100&apiKey=${API_KEY}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  )
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
       }
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((data) => data.articles);
-  }
+    })
+    .then((data) => data.articles);
 }
 
-const newsApi = new NewsApi({
-  newsUrl: NEWS_URL,
-  apiKey: API_KEY,
-  today: new Date(),
-  lastWeek: new Date(Date.now() - SEARCH_INTERVAL),
-  practicumUrl: PROXY_URL,
-  pageSize: PAGE_SIZE,
-  endpoint: "/everything?",
-});
-
-export default newsApi;
+export default getNews;
