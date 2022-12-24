@@ -1,9 +1,14 @@
 import React from "react";
 import "./SearchForm.scss";
 
-function SearchForm() {
+function SearchForm(props) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onSearch();
+  }
+
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={handleSubmit}>
       <input
         type="text"
         className="search-form__input"

@@ -4,8 +4,15 @@ import Header from "../Header/Header";
 import About from "../About/About";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
+import NewsCardList from "../NewsCardList/NewsCardList";
 
 function Main(props) {
+  const [isSearching, setIsSearching] = React.useState(false);
+
+  function handleSearchSubmit() {
+    setIsSearching(true);
+  }
+
   return (
     <>
       <section className="main">
@@ -16,9 +23,10 @@ function Main(props) {
             Encuentra las últimas noticias sobre cualquier tema y guárdalas en
             tu cuenta personal.
           </p>
-          <SearchForm />
+          <SearchForm onSearch={handleSearchSubmit} />
         </div>
       </section>
+      {isSearching ? <NewsCardList /> : ""}
       <About />
       <Footer />
     </>
