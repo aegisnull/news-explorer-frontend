@@ -5,12 +5,23 @@ import About from "../About/About";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import NewsCardList from "../NewsCardList/NewsCardList";
+import { NewsContext } from "../../contexts/NewsContext";
+import getNews from "../../utils/NewsApi";
 
 function Main(props) {
   const [isSearching, setIsSearching] = React.useState(false);
+  const [news, setNews] = React.useState([]);
+  const [searchInput, setSearchInput] = React.useState("");
 
   function handleSearchSubmit() {
     setIsSearching(true);
+    getNewsObject();
+  }
+
+  function getNewsObject() {
+    getNews(searchInput).then((res) => {
+      setNews(res);
+    });
   }
 
   return (
@@ -23,10 +34,15 @@ function Main(props) {
             Encuentra las últimas noticias sobre cualquier tema y guárdalas en
             tu cuenta personal.
           </p>
-          <SearchForm onSearch={handleSearchSubmit} />
+          <SearchForm
+            onSearch={handleSearchSubmit}
+            setSearchInput={setSearchInput}
+          />
         </div>
       </section>
-      {isSearching ? <NewsCardList /> : ""}
+      <NewsContext.Provider value={news}>
+        {isSearching ? <NewsCardList /> : ""}
+      </NewsContext.Provider>
       <About />
       <Footer />
     </>
