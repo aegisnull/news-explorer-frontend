@@ -5,32 +5,55 @@ import "./NewsCard.scss";
 function NewsCard() {
   const news = React.useContext(NewsContext);
 
-  const [showAllCards, setShowAllCards] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const cardsPerPage = 3;
+  const maxPage = Math.ceil(news.length / cardsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < maxPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <>
       <h1 className="cards-section-title">Resultados de la búsqueda</h1>
       <div className="cards-container">
-        {news.slice(0, showAllCards ? news.length : 3).map((news, index) => (
-          <Card
-            title={news.title}
-            urlToImage={news.urlToImage}
-            url={news.url}
-            publishedAt={news.publishedAt}
-            content={news.content}
-            source={news.source.name}
-            key={index}
-          />
-        ))}
-
-        {showAllCards ? null : (
+        {news
+          .slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
+          .map((news, index) => (
+            <Card
+              title={news.title}
+              urlToImage={news.urlToImage}
+              url={news.url}
+              publishedAt={news.publishedAt}
+              content={news.content}
+              source={news.source.name}
+              key={index}
+            />
+          ))}
+        {currentPage > 1 ? (
           <button
             className="cards-container__view-more"
-            onClick={() => setShowAllCards(true)}
+            onClick={handlePrevPage}
           >
-            View More
+            Ver anteriores
           </button>
-        )}
+        ) : null}
+        {currentPage < maxPage ? (
+          <button
+            className="cards-container__view-more"
+            onClick={handleNextPage}
+          >
+            Ver más
+          </button>
+        ) : null}
       </div>
     </>
   );
