@@ -1,6 +1,7 @@
 import React from "react";
 import { NewsContext } from "../../contexts/NewsContext";
 import "./NewsCard.scss";
+import NoResults from "../NoResults/NoResults";
 
 function NewsCard() {
   const news = React.useContext(NewsContext);
@@ -20,6 +21,10 @@ function NewsCard() {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  if (news.length === 0) {
+    return <NoResults />;
+  }
 
   return (
     <>
