@@ -12,6 +12,7 @@ function Main(props) {
   const [isSearching, setIsSearching] = React.useState(false);
   const [news, setNews] = React.useState([]);
   const [searchInput, setSearchInput] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   function handleSearchSubmit() {
     setIsSearching(true);
@@ -19,9 +20,14 @@ function Main(props) {
   }
 
   function getNewsObject() {
-    getNews(searchInput).then((res) => {
-      setNews(res);
-    });
+    setIsLoading(true);
+    getNews(searchInput)
+      .then((res) => {
+        setNews(res);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -41,7 +47,7 @@ function Main(props) {
         </div>
       </section>
       <NewsContext.Provider value={news}>
-        {isSearching ? <NewsCardList /> : ""}
+        {isSearching ? <NewsCardList isLoading={isLoading} /> : ""}
       </NewsContext.Provider>
       <About />
       <Footer />

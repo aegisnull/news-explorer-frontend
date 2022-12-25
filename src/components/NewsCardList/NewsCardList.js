@@ -12,7 +12,7 @@ function NewsCardList(props) {
 
   return (
     <section className="news-card-list">
-      {props.isLoading ? <Preloader /> : { cardComponent }}
+      {props.isLoading ? <Preloader /> : cardComponent}
     </section>
   );
 }
