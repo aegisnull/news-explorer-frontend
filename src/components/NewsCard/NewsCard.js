@@ -3,31 +3,33 @@ import { NewsContext } from "../../contexts/NewsContext";
 import "./NewsCard.scss";
 
 function NewsCard() {
-  const Cards = document.querySelectorAll(".card");
   const news = React.useContext(NewsContext);
+
+  const [showAllCards, setShowAllCards] = React.useState(false);
 
   return (
     <>
       <h1 className="cards-section-title">Resultados de la búsqueda</h1>
       <div className="cards-container">
-        {news.map((news, index) => {
-          return (
-            <Card
-              title={news.title}
-              urlToImage={news.urlToImage}
-              url={news.url}
-              publishedAt={news.publishedAt}
-              content={news.content}
-              source={news.source.name}
-              key={index}
-            />
-          );
-        })}
+        {news.slice(0, showAllCards ? news.length : 3).map((news, index) => (
+          <Card
+            title={news.title}
+            urlToImage={news.urlToImage}
+            url={news.url}
+            publishedAt={news.publishedAt}
+            content={news.content}
+            source={news.source.name}
+            key={index}
+          />
+        ))}
 
-        {Cards.length >= 3 ? (
-          <button className="cards-container__view-more">Ver más</button>
-        ) : (
-          ""
+        {showAllCards ? null : (
+          <button
+            className="cards-container__view-more"
+            onClick={() => setShowAllCards(true)}
+          >
+            View More
+          </button>
         )}
       </div>
     </>
