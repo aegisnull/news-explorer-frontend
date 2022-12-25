@@ -91,7 +91,13 @@ function Card(props) {
       >
         <img className="card__image" src={props.urlToImage} alt={props.title} />
         <div className="card__container">
-          <p className="card__date">{props.publishedAt}</p>
+          <p className="card__date">
+            {new Date(props.publishedAt).toLocaleDateString("es-MX", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
           <h3 className="card__title">{props.title}</h3>
           <p className="card__text">{props.content}</p>
           <p className="card__publisher">{props.source}</p>
