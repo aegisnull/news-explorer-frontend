@@ -179,5 +179,9 @@
     font-size: 10px;
     font-weight: 500;
     line-height: 11.72px;
+
+    &_active {
+      display: block;
+    }
   }
 }

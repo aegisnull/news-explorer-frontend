@@ -37,8 +37,24 @@ function NewsCard() {
 }
 
 function Card(props) {
+  const cardRef = React.useRef(null);
+
+  function showTooltip(cardElement) {
+    const tooltip = cardElement.querySelector(".card__hover-text");
+    tooltip.classList.toggle("card__hover-text_active");
+  }
+
+  const handleCardHover = (event) => {
+    showTooltip(event.currentTarget);
+  };
+
   return (
-    <article className="card">
+    <article
+      className="card"
+      onMouseEnter={handleCardHover}
+      onMouseLeave={handleCardHover}
+      ref={cardRef}
+    >
       <button className="card__save-button" />
       <button className="card__keyword-button"></button>
       <button className="card__hover-text">
