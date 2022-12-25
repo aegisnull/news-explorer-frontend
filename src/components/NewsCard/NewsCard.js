@@ -1,6 +1,6 @@
 import React from "react";
-import "./NewsCard.scss";
 import { NewsContext } from "../../contexts/NewsContext";
+import "./NewsCard.scss";
 
 function NewsCard() {
   const Cards = document.querySelectorAll(".card");
