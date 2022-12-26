@@ -8,7 +8,7 @@
   &__container {
     width: 608px;
     margin: auto;
-    padding-top: 10px;
+    padding: 0;
   }
 
   &__title {
@@ -64,7 +64,6 @@ $breakpoint-mobile: 500px;
 
     &__container {
       width: 90vw;
-      padding-top: 30px;
     }
 
     &__title {
