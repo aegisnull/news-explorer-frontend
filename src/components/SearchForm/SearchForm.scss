@@ -1,5 +1,5 @@
 .search-form {
-  padding-top: 44px;
+  padding-top: 64px;
   position: relative;
   &__input {
     width: 608px;
@@ -24,5 +24,17 @@
     color: white;
     border: none;
     cursor: pointer;
+  }
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 500px;
+
+@media screen and (max-width: $breakpoint-tablet) {
+  .search-form {
+    padding-top: 48px;
+    &__input {
+      width: 440px;
+    }
   }
 }

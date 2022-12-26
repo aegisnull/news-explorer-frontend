@@ -17,6 +17,8 @@
     font-size: 60px;
     line-height: 64px;
     width: 80%;
+    margin: 0;
+    padding-top: 80px;
   }
 
   &__subtitle {
@@ -24,6 +26,8 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
+    margin: 0;
+    padding-top: 32px;
   }
 }
 
@@ -37,13 +41,17 @@ $breakpoint-mobile: 500px;
 
     &__container {
       width: 452px;
-      padding-top: 38px;
     }
 
     &__title {
       font-size: 36px;
       line-height: 40px;
       width: 60%;
+      padding-top: 38px;
+    }
+
+    &__subtitle {
+      padding-top: 16px;
     }
   }
 }
@@ -60,13 +68,11 @@ $breakpoint-mobile: 500px;
 
     &__title {
       font-size: 32px;
-      line-height: 40px;
       width: 100%;
     }
 
     &__subtitle {
       font-size: 20px;
-      line-height: 24px;
     }
   }
 }
