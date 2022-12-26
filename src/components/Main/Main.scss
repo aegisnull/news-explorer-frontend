@@ -60,19 +60,22 @@ $breakpoint-mobile: 500px;
   .main {
     height: 536px;
     background-position-x: center;
+    padding-top: 0;
 
     &__container {
-      width: 85vw;
+      width: 90vw;
       padding-top: 30px;
     }
 
     &__title {
       font-size: 32px;
       width: 100%;
+      padding-top: 30px;
     }
 
     &__subtitle {
       font-size: 20px;
+      padding-top: 16px;
     }
   }
 }

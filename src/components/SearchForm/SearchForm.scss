@@ -38,3 +38,19 @@ $breakpoint-mobile: 500px;
     }
   }
 }
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .search-form {
+    padding-top: 98px;
+    &__input {
+      width: 80vw;
+    }
+    &__button {
+      position: relative;
+      bottom: -16px;
+      right: 0;
+      width: 90vw;
+      height: 56px;
+    }
+  }
+}
