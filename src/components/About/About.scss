@@ -61,6 +61,12 @@ $breakpoint-mobile: 500px;
   }
 }
 
+@media (max-width: 705px) {
+  .about {
+    height: 100%;
+  }
+}
+
 @media (max-width: $breakpoint-mobile) {
   .about {
     height: 752px;
