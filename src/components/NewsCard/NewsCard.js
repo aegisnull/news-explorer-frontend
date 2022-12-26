@@ -43,22 +43,24 @@ function NewsCard() {
               key={index}
             />
           ))}
-        {currentPage > 1 ? (
-          <button
-            className="cards-container__view-more"
-            onClick={handlePrevPage}
-          >
-            Ver anteriores
-          </button>
-        ) : null}
-        {currentPage < maxPage ? (
-          <button
-            className="cards-container__view-more"
-            onClick={handleNextPage}
-          >
-            Ver más
-          </button>
-        ) : null}
+        <div className="cards-container__view-more-container">
+          {currentPage > 1 ? (
+            <button
+              className="cards-container__view-more"
+              onClick={handlePrevPage}
+            >
+              Ver anteriores
+            </button>
+          ) : null}
+          {currentPage < maxPage ? (
+            <button
+              className="cards-container__view-more"
+              onClick={handleNextPage}
+            >
+              Ver más
+            </button>
+          ) : null}
+        </div>
       </div>
     </>
   );
