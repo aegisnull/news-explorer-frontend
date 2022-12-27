@@ -135,7 +135,7 @@ $breakpoint-mobile: 500px;
 
   .dropdown {
     width: 100vw;
-    height: 40vh;
+    height: 230px;
     background-color: black;
     z-index: -1;
     position: absolute;
@@ -149,7 +149,7 @@ $breakpoint-mobile: 500px;
 
   .header__link_dropdown {
     display: block;
-    padding-top: 71px;
+    padding-top: 81px;
     padding-left: 16px;
   }
 
@@ -157,6 +157,6 @@ $breakpoint-mobile: 500px;
     display: block;
     margin: auto;
     width: 90vw;
-    margin-top: 22px;
+    margin-top: 32px;
   }
 }
