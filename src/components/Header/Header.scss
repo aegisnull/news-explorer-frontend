@@ -2,6 +2,7 @@
   height: 80px;
   display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
   &__container {
     width: 80%;
     max-width: 1366px;
@@ -102,13 +103,18 @@ $breakpoint-mobile: 500px;
 @media screen and (max-width: $breakpoint-mobile) {
   .header {
     height: 56px;
+    z-index: 1;
 
     &__container {
       width: 90%;
+      z-index: 1;
     }
 
     &__text {
       font-size: 14px;
+    }
+
+    &__nav {
     }
 
     &__link {
@@ -119,8 +125,38 @@ $breakpoint-mobile: 500px;
       display: none;
     }
 
+    &__logo {
+    }
+
     &__mobile-menu {
       display: block;
     }
+  }
+
+  .dropdown {
+    width: 100vw;
+    height: 40vh;
+    background-color: black;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .header__nav_dropdown {
+    flex-direction: column;
+  }
+
+  .header__link_dropdown {
+    display: block;
+    padding-top: 71px;
+    padding-left: 16px;
+  }
+
+  .header__text_dropdown {
+    display: block;
+    margin: auto;
+    width: 90vw;
+    margin-top: 22px;
   }
 }

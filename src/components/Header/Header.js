@@ -18,9 +18,9 @@ function Header(props) {
 
   const [menuOpen, setMenuOpen] = React.useState(false);
 
-  const toggleMenu = () => {
+  function toggleMenu() {
     setMenuOpen(!menuOpen);
-  };
+  }
 
   return (
     <header className="header">
@@ -30,26 +30,56 @@ function Header(props) {
             <img src={logoPath} alt="NewsExplorer Logo" />
           </div>
         </Link>
-        <nav className="header__nav">
-          <Link to={"/"}>
-            <div className={`header__link header__text ${textColor}`}>
-              Inicio
+
+        {menuOpen ? (
+          <>
+            <nav className="header__nav header__nav_dropdown">
+              <button className="header__mobile-menu" onClick={toggleMenu}>
+                <img
+                  src={mobileMenu}
+                  alt="Mobile Menu"
+                  className="header-mobile-menu-img"
+                />
+              </button>
+            </nav>
+            <div className="dropdown">
+              <Link to={"/"}>
+                <div
+                  className={`header__link header__text header__link_dropdown ${textColor}`}
+                >
+                  Inicio
+                </div>
+              </Link>
+              <button
+                className={`${buttonColor} header__text header__text_dropdown `}
+                onClick={props.onSignInClick}
+              >
+                Iniciar sesión
+              </button>
             </div>
-          </Link>
-          <button
-            className={`${buttonColor} header__text `}
-            onClick={props.onSignInClick}
-          >
-            Iniciar sesión
-          </button>
-          <button className="header__mobile-menu" onClick={toggleMenu}>
-            <img
-              src={mobileMenu}
-              alt="Mobile Menu"
-              className="header-mobile-menu-img"
-            />
-          </button>
-        </nav>
+          </>
+        ) : (
+          <nav className="header__nav">
+            <Link to={"/"}>
+              <div className={`header__link header__text ${textColor}`}>
+                Inicio
+              </div>
+            </Link>
+            <button
+              className={`${buttonColor} header__text `}
+              onClick={props.onSignInClick}
+            >
+              Iniciar sesión
+            </button>
+            <button className="header__mobile-menu" onClick={toggleMenu}>
+              <img
+                src={mobileMenu}
+                alt="Mobile Menu"
+                className="header-mobile-menu-img"
+              />
+            </button>
+          </nav>
+        )}
       </div>
     </header>
   );
