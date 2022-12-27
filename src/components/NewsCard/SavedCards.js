@@ -1,15 +1,28 @@
 import React from "react";
 import "./NewsCard.scss";
+import SampleNews from "../../utils/SampleNews";
 
 function SavedCards() {
   return (
     <>
-      <div className="cards-container"></div>
+      <div className="cards-container">
+        {SampleNews.map((news) => (
+          <Card
+            key={news.id}
+            url={news.url}
+            urlToImage={news.urlToImage}
+            publishedAt={news.publishedAt}
+            title={news.title}
+            content={news.content}
+            source={news.source}
+          />
+        ))}
+      </div>
     </>
   );
 }
 
-/* function Card(props) {
+function Card(props) {
   return (
     <article className="card">
       <button className="card__trash-button" />
@@ -31,6 +44,6 @@ function SavedCards() {
       </a>
     </article>
   );
-} */
+}
 
 export default SavedCards;
