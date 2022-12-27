@@ -16,6 +16,12 @@ function Header(props) {
   const mobileMenu =
     currentPath === "/saved-news" ? MobileMenuDark : MobileMenuLight;
 
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className="header">
       <div className="header__container">
@@ -36,7 +42,7 @@ function Header(props) {
           >
             Iniciar sesión
           </button>
-          <button className="header__mobile-menu">
+          <button className="header__mobile-menu" onClick={toggleMenu}>
             <img
               src={mobileMenu}
               alt="Mobile Menu"
