@@ -20,6 +20,11 @@
   max-width: 1252px;
   padding-top: 64px;
 
+  &_saved {
+    justify-content: flex-start;
+    padding-bottom: 32px;
+  }
+
   &__view-more-container {
     margin: 64px 0 80px 0;
     display: flex;

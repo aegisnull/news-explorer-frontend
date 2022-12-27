@@ -40,6 +40,34 @@ const SampleNews = [
       "Japan is set to unveil on Friday a record $864 billion budget for the next fiscal year from April, pushed up by increased military spending and higher social security costs",
     source: "Reuters",
   },
+  {
+    id: 4,
+    title:
+      "Japan to unveil record $864 bln budget driven by military costs - Reuters",
+    description:
+      "Japan is set to unveil on Friday a record $864 billion budget for the next fiscal year from April, pushed up by increased military spending and higher social security costs",
+    url: "https://www.reuters.com/markets/asia/japan-unveil-record-864-bln-budget-driven-by-military-costs-2022-12-23/",
+    urlToImage:
+      "https://www.reuters.com/resizer/Kylu2IQCDJztPlfgIl02nppIK2w=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/Y63P22JKBJKNZHNKNCU6ECL6XI.jpg",
+    publishedAt: "22 de diciembre de 2022",
+    content:
+      "Japan is set to unveil on Friday a record $864 billion budget for the next fiscal year from April, pushed up by increased military spending and higher social security costs",
+    source: "Reuters",
+  },
+  {
+    id: 5,
+    title:
+      "Japan to unveil record $864 bln budget driven by military costs - Reuters",
+    description:
+      "Japan is set to unveil on Friday a record $864 billion budget for the next fiscal year from April, pushed up by increased military spending and higher social security costs",
+    url: "https://www.reuters.com/markets/asia/japan-unveil-record-864-bln-budget-driven-by-military-costs-2022-12-23/",
+    urlToImage:
+      "https://www.reuters.com/resizer/Kylu2IQCDJztPlfgIl02nppIK2w=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/Y63P22JKBJKNZHNKNCU6ECL6XI.jpg",
+    publishedAt: "22 de diciembre de 2022",
+    content:
+      "Japan is set to unveil on Friday a record $864 billion budget for the next fiscal year from April, pushed up by increased military spending and higher social security costs",
+    source: "Reuters",
+  },
 ];
 
 export default SampleNews;

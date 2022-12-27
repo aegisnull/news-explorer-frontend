@@ -5,7 +5,7 @@ import SampleNews from "../../utils/SampleNews";
 function SavedCards() {
   return (
     <>
-      <div className="cards-container">
+      <div className="cards-container cards-container_saved">
         {SampleNews.map((news) => (
           <Card
             key={news.id}
