@@ -123,6 +123,10 @@ $breakpoint-mobile: 500px;
 
     &__button {
       display: none;
+
+      &_light {
+        display: none;
+      }
     }
 
     &__logo {

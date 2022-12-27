@@ -8,15 +8,20 @@ import MobileMenuLight from "../../images/mobile-header_light.svg";
 import "./Header.scss";
 
 function Header(props) {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
   const currentPath = useLocation().pathname;
-  const logoPath = currentPath === "/saved-news" ? LightLogo : Logo;
+  const logoPath =
+    (currentPath === "/saved-news") & !menuOpen ? LightLogo : Logo;
   const textColor = currentPath === "/saved-news" ? "header__link_light" : "";
   const buttonColor =
-    currentPath === "/saved-news" ? "header__button_light" : "header__button";
+    (currentPath === "/saved-news") & !menuOpen
+      ? "header__button_light"
+      : "header__button";
   const mobileMenu =
-    currentPath === "/saved-news" ? MobileMenuDark : MobileMenuLight;
-
-  const [menuOpen, setMenuOpen] = React.useState(false);
+    (currentPath === "/saved-news") & !menuOpen
+      ? MobileMenuDark
+      : MobileMenuLight;
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -45,7 +50,7 @@ function Header(props) {
             <div className="dropdown">
               <Link to={"/"}>
                 <div
-                  className={`header__link header__text header__link_dropdown ${textColor}`}
+                  className={`header__link header__text header__link_dropdown `}
                 >
                   Inicio
                 </div>
