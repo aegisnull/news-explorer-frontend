@@ -137,6 +137,10 @@
     background-image: url(../../images/trash.svg);
     background-position: center;
     background-repeat: no-repeat;
+
+    &:hover {
+      background-image: url(../../images/trash_hover.svg);
+    }
   }
 
   &__save-button {
