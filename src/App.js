@@ -72,7 +72,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />
-        <Route path="/saved-news" element={<SavedNews />} />
+        <Route
+          path="/saved-news"
+          element={<SavedNews onSignInClick={handleSignInClick} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
