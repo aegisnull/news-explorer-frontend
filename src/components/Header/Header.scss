@@ -11,6 +11,12 @@
     align-items: center;
   }
 
+  &__mobile-menu {
+    background: transparent;
+    border: none;
+    display: none;
+  }
+
   &__nav {
     display: flex;
     font-family: "Roboto", sans-serif;
@@ -105,8 +111,16 @@ $breakpoint-mobile: 500px;
       font-size: 14px;
     }
 
-    &__nav {
+    &__link {
       display: none;
+    }
+
+    &__button {
+      display: none;
+    }
+
+    &__mobile-menu {
+      display: block;
     }
   }
 }

@@ -2,6 +2,8 @@ import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import Logo from "../../images/logo.svg";
 import LightLogo from "../../images/logo_light.svg";
+import MobileMenuDark from "../../images/mobile-header_dark.svg";
+import MobileMenuLight from "../../images/mobile-header_light.svg";
 
 import "./Header.scss";
 
@@ -11,6 +13,8 @@ function Header(props) {
   const textColor = currentPath === "/saved-news" ? "header__link_light" : "";
   const buttonColor =
     currentPath === "/saved-news" ? "header__button_light" : "header__button";
+  const mobileMenu =
+    currentPath === "/saved-news" ? MobileMenuDark : MobileMenuLight;
 
   return (
     <header className="header">
@@ -31,6 +35,13 @@ function Header(props) {
             onClick={props.onSignInClick}
           >
             Iniciar sesión
+          </button>
+          <button className="header__mobile-menu">
+            <img
+              src={mobileMenu}
+              alt="Mobile Menu"
+              className="header-mobile-menu-img"
+            />
           </button>
         </nav>
       </div>
