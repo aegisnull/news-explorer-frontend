@@ -111,6 +111,7 @@ function App() {
           isOpen={isSignInPopupOpen}
           onClose={closeAllPopups}
           onRegister={handleSignUpClick}
+          onSubmit={handleLogin}
         />
         <SignUpPopup
           isOpen={isSignUpPopupOpen}
