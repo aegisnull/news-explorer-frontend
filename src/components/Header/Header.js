@@ -23,6 +23,9 @@ function Header(props) {
       ? MobileMenuDark
       : MobileMenuLight;
 
+  const logOutIcon =
+    currentPath === "/saved-news" ? "header__user_light" : "header__user_dark";
+
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
@@ -65,7 +68,7 @@ function Header(props) {
                     </div>
                   </Link>
                   <button
-                    className={`${buttonColor} header__text header__text_dropdown header__user `}
+                    className={`${buttonColor} header__text header__text_dropdown ${logOutIcon} `}
                     onClick={props.letLogOut}
                   >
                     Elise
@@ -98,7 +101,7 @@ function Header(props) {
                   </div>
                 </Link>
                 <button
-                  className={`${buttonColor} header__text header__user `}
+                  className={`${buttonColor} header__text ${logOutIcon}`}
                   onClick={props.letLogOut}
                 >
                   Elise
