@@ -1,7 +1,6 @@
 import Main from "./components/Main/Main";
 import SavedNews from "./components/SavedNews/SavedNews";
-import NotFound from "./components/NotFound/NotFound";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SignInPopup from "./components/PopupWithForm/SignInPopup";
 import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
 import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
@@ -82,7 +81,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );
