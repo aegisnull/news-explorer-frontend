@@ -25,9 +25,19 @@ function authenticate(user) {
   }).then(checkResponse);
 }
 
-function validateToken(token) {
+/* function validateToken(token) {
   return fetch(BaseUrl + "/users/me", {
     headers: { ...Headers, Authorization: "Bearer " + token },
+    method: "GET",
+  }).then(checkResponse);
+} */
+
+function getUserInfo() {
+  return fetch(BaseUrl + "/users/me", {
+    headers: {
+      ...Headers,
+      Authorization: "Bearer " + localStorage.getItem("jwt"),
+    },
     method: "GET",
   }).then(checkResponse);
 }
@@ -39,4 +49,4 @@ function checkResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-export { register, authenticate, validateToken };
+export { register, authenticate /* validateToken */, getUserInfo };
