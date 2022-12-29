@@ -66,7 +66,7 @@ function Header(props) {
                   </Link>
                   <button
                     className={`${buttonColor} header__text header__text_dropdown header__user `}
-                    onClick={props.onSignInClick}
+                    onClick={props.letLogOut}
                   >
                     Elise
                   </button>
@@ -99,7 +99,7 @@ function Header(props) {
                 </Link>
                 <button
                   className={`${buttonColor} header__text header__user `}
-                  onClick={props.onSignInClick}
+                  onClick={props.letLogOut}
                 >
                   Elise
                 </button>

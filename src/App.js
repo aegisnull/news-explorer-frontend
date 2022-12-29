@@ -131,7 +131,11 @@ function App() {
           <Route
             path="/"
             element={
-              <Main onSignInClick={handleSignInClick} isLoggedIn={isLoggedIn} />
+              <Main
+                onSignInClick={handleSignInClick}
+                isLoggedIn={isLoggedIn}
+                letLogOut={handleLogout}
+              />
             }
           />
           <Route
@@ -141,6 +145,7 @@ function App() {
                 <SavedNews
                   onSignInClick={handleSignInClick}
                   isLoggedIn={isLoggedIn}
+                  letLogOut={handleLogout}
                 />
               </ProtectedRoute>
             }

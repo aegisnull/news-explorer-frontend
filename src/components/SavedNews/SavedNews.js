@@ -11,6 +11,7 @@ function SavedNews(props) {
       <Header
         onSignInClick={props.onSignInClick}
         isLoggedIn={props.isLoggedIn}
+        letLogOut={props.letLogOut}
       />
       <SavedNewsHeader />
       <section className="news__container">

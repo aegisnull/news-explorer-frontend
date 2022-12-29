@@ -36,6 +36,7 @@ function Main(props) {
         <Header
           onSignInClick={props.onSignInClick}
           isLoggedIn={props.isLoggedIn}
+          letLogOut={props.letLogOut}
         />
         <div className="main__container">
           <h1 className="main__title">¿Qué está pasando en el mundo?</h1>
