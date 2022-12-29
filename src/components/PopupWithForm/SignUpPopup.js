@@ -4,9 +4,22 @@ import PopupWithForm from "./PopupWithForm";
 import "./PopupWithForm.scss";
 
 function SignUpPopup(props) {
+  const [inputs, setInputs] = React.useState({});
+
   function handleSubmit(e) {
     e.preventDefault();
     props.onSuccess();
+    props.onSubmit({
+      email: inputs.email,
+      password: inputs.password,
+    });
+  }
+
+  function handleInputChange(evt) {
+    setInputs({
+      ...inputs,
+      [evt.target.name]: evt.target.value,
+    });
   }
 
   return (
@@ -26,6 +39,7 @@ function SignUpPopup(props) {
           type="email"
           name="email"
           placeholder="Introduce tu correo electrónico"
+          onChange={handleInputChange}
           required
         />
         <span className="popup__input-error"></span>
@@ -37,6 +51,7 @@ function SignUpPopup(props) {
           type="password"
           name="password"
           placeholder="Introduce tu contraseña"
+          onChange={handleInputChange}
           required
         />
         <span className="popup__input-error"></span>
@@ -48,6 +63,7 @@ function SignUpPopup(props) {
           type="text"
           name="username"
           placeholder="Introduce tu nombre de usuario"
+          onChange={handleInputChange}
           required
         />
         <span className="popup__input-error"></span>

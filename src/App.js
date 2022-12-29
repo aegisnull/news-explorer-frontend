@@ -117,6 +117,7 @@ function App() {
           onClose={closeAllPopups}
           isRegisterOpen
           onSuccess={handleSuccessClick}
+          onSubmit={handleSignUp}
         />
 
         <SuccessPopup
