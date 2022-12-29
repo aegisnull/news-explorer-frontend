@@ -1,3 +1,5 @@
+// Description: temporary use of the Practicum API for authorization and registration of users on the site.
+
 const BaseUrl = "https://register.nomoreparties.co";
 const Headers = { "Content-Type": "application/json" };
 
