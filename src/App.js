@@ -7,6 +7,7 @@ import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
+import { register, authenticate, validateToken } from "./utils/Auth";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
@@ -14,6 +15,39 @@ function App() {
   const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [isSuccess, setIsSuccess] = React.useState(false);
+
+  function handleSignUp(userData) {
+    register(userData)
+      .then((user) => {
+        if (user.data._id) {
+          setIsSuccess(true);
+        } else {
+          setIsSuccess(false);
+        }
+      })
+      .catch(() => {
+        setIsSuccess(false);
+      });
+  }
+
+  function handleLogin(userData) {
+    authenticate(userData)
+      .then((user) => {
+        if (user.token) {
+          localStorage.setItem("jwt", user.token);
+          setIsLoggedIn(true);
+        }
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
+      });
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+  }
 
   function handleSignUpClick() {
     setSignUpPopupOpen(true);
