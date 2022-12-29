@@ -32,16 +32,6 @@ function validateToken(token) {
   }).then(checkResponse);
 }
 
-/* function getUserInfo() {
-  return fetch(BaseUrl + "/users/me", {
-    headers: {
-      ...Headers,
-      Authorization: "Bearer " + localStorage.getItem("jwt"),
-    },
-    method: "GET",
-  }).then(checkResponse);
-} */
-
 function checkResponse(res) {
   if (res.ok) {
     return res.json();
