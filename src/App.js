@@ -46,7 +46,7 @@ function App() {
         setIsSuccess(false);
       })
       .finally(() => {
-        setSignUpPopupOpen(true);
+        setSuccessPopupOpen(true);
       });
   }
 
