@@ -6,11 +6,13 @@ import SignInPopup from "./components/PopupWithForm/SignInPopup";
 import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
 import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
   const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   function handleSignUpClick() {
     setSignUpPopupOpen(true);
@@ -74,7 +76,11 @@ function App() {
         <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />
         <Route
           path="/saved-news"
-          element={<SavedNews onSignInClick={handleSignInClick} />}
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <SavedNews onSignInClick={handleSignInClick} />
+            </ProtectedRoute>
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
