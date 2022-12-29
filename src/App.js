@@ -35,13 +35,15 @@ function App() {
       .then((user) => {
         if (user.data._id) {
           setIsSuccess(true);
-          setSuccessPopupOpen(true);
         } else {
           setIsSuccess(false);
         }
       })
       .catch(() => {
         setIsSuccess(false);
+      })
+      .finally(() => {
+        setSignUpPopupOpen(true);
       });
   }
 
@@ -127,6 +129,7 @@ function App() {
           isOpen={isSuccessPopupOpen}
           onClose={closeAllPopups}
           isSuccess={isSuccess}
+          openSignIn={setSignInPopupOpen}
         />
 
         <Routes>
