@@ -8,11 +8,11 @@ function SignUpPopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSuccess();
     props.onSubmit({
       email: inputs.email,
       password: inputs.password,
     });
+    setInputs({});
   }
 
   function handleInputChange(evt) {
@@ -39,6 +39,7 @@ function SignUpPopup(props) {
           type="email"
           name="email"
           placeholder="Introduce tu correo electrónico"
+          value={inputs.email || ""}
           onChange={handleInputChange}
           required
         />
@@ -51,6 +52,7 @@ function SignUpPopup(props) {
           type="password"
           name="password"
           placeholder="Introduce tu contraseña"
+          value={inputs.password || ""}
           onChange={handleInputChange}
           required
         />
@@ -63,6 +65,7 @@ function SignUpPopup(props) {
           type="text"
           name="username"
           placeholder="Introduce tu nombre de usuario"
+          value={inputs.username || ""}
           onChange={handleInputChange}
           required
         />

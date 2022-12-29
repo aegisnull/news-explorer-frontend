@@ -35,6 +35,7 @@ function App() {
       .then((user) => {
         if (user.data._id) {
           setIsSuccess(true);
+          setSuccessPopupOpen(true);
         } else {
           setIsSuccess(false);
         }
@@ -50,6 +51,7 @@ function App() {
         if (user.token) {
           localStorage.setItem("jwt", user.token);
           setIsLoggedIn(true);
+          console.log(user.token);
         }
       })
       .catch(() => {
