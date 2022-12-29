@@ -50,17 +50,37 @@ function Header(props) {
             <div className="dropdown">
               <Link to={"/"}>
                 <div
-                  className={`header__link header__text header__link_dropdown `}
+                  className={`header__link header__text header__link_dropdown1 `}
                 >
                   Inicio
                 </div>
               </Link>
-              <button
-                className={`${buttonColor} header__text header__text_dropdown `}
-                onClick={props.onSignInClick}
-              >
-                Iniciar sesión
-              </button>
+              {props.isLoggedIn ? (
+                <>
+                  <Link to={"/saved-news"}>
+                    <div
+                      className={`header__link header__text ${textColor} header__link_dropdown2`}
+                    >
+                      Artículos guardados
+                    </div>
+                  </Link>
+                  <button
+                    className={`${buttonColor} header__text header__text_dropdown header__user `}
+                    onClick={props.onSignInClick}
+                  >
+                    Elise
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className={`${buttonColor} header__text header__text_dropdown `}
+                    onClick={props.onSignInClick}
+                  >
+                    Iniciar sesión
+                  </button>
+                </>
+              )}
             </div>
           </>
         ) : (
@@ -72,6 +92,11 @@ function Header(props) {
             </Link>
             {props.isLoggedIn ? (
               <>
+                <Link to={"/saved-news"}>
+                  <div className={`header__link header__text ${textColor}`}>
+                    Artículos guardados
+                  </div>
+                </Link>
                 <button
                   className={`${buttonColor} header__text header__user `}
                   onClick={props.onSignInClick}

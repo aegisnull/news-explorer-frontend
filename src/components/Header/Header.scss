@@ -48,6 +48,7 @@
   &__link {
     color: white;
     cursor: pointer;
+    text-decoration: none;
 
     &_light {
       color: black;
@@ -161,9 +162,14 @@ $breakpoint-mobile: 500px;
     flex-direction: column;
   }
 
-  .header__link_dropdown {
+  .header__link_dropdown1 {
     display: block;
+    padding-left: 16px;
     padding-top: 81px;
+  }
+
+  .header__link_dropdown2 {
+    display: block;
     padding-left: 16px;
   }
 
