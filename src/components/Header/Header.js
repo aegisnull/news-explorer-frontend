@@ -4,6 +4,7 @@ import Logo from "../../images/logo.svg";
 import LightLogo from "../../images/logo_light.svg";
 import MobileMenuDark from "../../images/mobile-header_dark.svg";
 import MobileMenuLight from "../../images/mobile-header_light.svg";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import "./Header.scss";
 
@@ -22,9 +23,10 @@ function Header(props) {
     (currentPath === "/saved-news") & !menuOpen
       ? MobileMenuDark
       : MobileMenuLight;
-
   const logOutIcon =
     currentPath === "/saved-news" ? "header__user_light" : "header__user_dark";
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -71,7 +73,7 @@ function Header(props) {
                     className={`${buttonColor} header__text header__text_dropdown ${logOutIcon} `}
                     onClick={props.letLogOut}
                   >
-                    Elise
+                    {currentUser.data.email}
                   </button>
                 </>
               ) : (
@@ -104,7 +106,7 @@ function Header(props) {
                   className={`${buttonColor} header__text ${logOutIcon}`}
                   onClick={props.letLogOut}
                 >
-                  Elise
+                  {currentUser.data.email}
                 </button>
                 <button className="header__mobile-menu" onClick={toggleMenu}>
                   <img
