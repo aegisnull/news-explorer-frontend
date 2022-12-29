@@ -56,6 +56,7 @@ function App() {
         if (user.token) {
           localStorage.setItem("jwt", user.token);
           setIsLoggedIn(true);
+          closeAllPopups();
         }
       })
       .catch(() => {
