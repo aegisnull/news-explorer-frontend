@@ -70,19 +70,39 @@ function Header(props) {
                 Inicio
               </div>
             </Link>
-            <button
-              className={`${buttonColor} header__text `}
-              onClick={props.onSignInClick}
-            >
-              Iniciar sesión
-            </button>
-            <button className="header__mobile-menu" onClick={toggleMenu}>
-              <img
-                src={mobileMenu}
-                alt="Mobile Menu"
-                className="header-mobile-menu-img"
-              />
-            </button>
+            {props.isLoggedIn ? (
+              <>
+                <button
+                  className={`${buttonColor} header__text header__user `}
+                  onClick={props.onSignInClick}
+                >
+                  Elise
+                </button>
+                <button className="header__mobile-menu" onClick={toggleMenu}>
+                  <img
+                    src={mobileMenu}
+                    alt="Mobile Menu"
+                    className="header-mobile-menu-img"
+                  />
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className={`${buttonColor} header__text `}
+                  onClick={props.onSignInClick}
+                >
+                  Iniciar sesión
+                </button>
+                <button className="header__mobile-menu" onClick={toggleMenu}>
+                  <img
+                    src={mobileMenu}
+                    alt="Mobile Menu"
+                    className="header-mobile-menu-img"
+                  />
+                </button>
+              </>
+            )}
           </nav>
         )}
       </div>

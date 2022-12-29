@@ -18,7 +18,7 @@ function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
   const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isSuccess, setIsSuccess] = React.useState(false);
 
@@ -119,12 +119,18 @@ function App() {
           onSuccess={handleSuccessClick}
         />
 
-        <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} />
+        <SuccessPopup
+          isOpen={isSuccessPopupOpen}
+          onClose={closeAllPopups}
+          isSuccess={isSuccess}
+        />
 
         <Routes>
           <Route
             path="/"
-            element={<Main onSignInClick={handleSignInClick} />}
+            element={
+              <Main onSignInClick={handleSignInClick} isLoggedIn={isLoggedIn} />
+            }
           />
           <Route
             path="/saved-news"

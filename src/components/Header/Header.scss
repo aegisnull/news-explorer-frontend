@@ -3,6 +3,12 @@
   display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
+  &__user::after {
+    content: url(../../images/logout.svg);
+    margin-left: 15px;
+    transform: translate(0, 2px);
+  }
+
   &__container {
     width: 80%;
     max-width: 1366px;
@@ -54,12 +60,19 @@
     border-radius: 100px;
     background-color: transparent;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
 
     &:hover {
       background-color: white;
       color: black;
       transition: 0.3s;
+
+      &::after {
+        content: url(../../images/logout_black.svg);
+      }
     }
 
     &_light {
@@ -68,6 +81,9 @@
       border-radius: 100px;
       background-color: transparent;
       color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
 
       &:hover {

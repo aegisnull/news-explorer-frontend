@@ -33,7 +33,10 @@ function Main(props) {
   return (
     <>
       <section className="main">
-        <Header onSignInClick={props.onSignInClick} />
+        <Header
+          onSignInClick={props.onSignInClick}
+          isLoggedIn={props.isLoggedIn}
+        />
         <div className="main__container">
           <h1 className="main__title">¿Qué está pasando en el mundo?</h1>
           <p className="main__subtitle">
