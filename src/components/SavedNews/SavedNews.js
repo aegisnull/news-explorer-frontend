@@ -8,7 +8,10 @@ import Footer from "../Footer/Footer";
 function SavedNews(props) {
   return (
     <section className="saved-news">
-      <Header onSignInClick={props.onSignInClick} />
+      <Header
+        onSignInClick={props.onSignInClick}
+        isLoggedIn={props.isLoggedIn}
+      />
       <SavedNewsHeader />
       <section className="news__container">
         <NewsCardList />
