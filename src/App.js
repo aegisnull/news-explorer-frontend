@@ -7,12 +7,7 @@ import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
-import {
-  register,
-  authenticate,
-  /* validateToken, */
-  getUserInfo,
-} from "./utils/Auth";
+import { register, authenticate, validateToken } from "./utils/Auth";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
@@ -23,11 +18,19 @@ function App() {
   const [isSuccess, setIsSuccess] = React.useState(false);
 
   React.useEffect(() => {
-    getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      validateToken(jwt)
+        .then((res) => {
+          if (res) {
+            setCurrentUser(res);
+            setIsLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   function handleSignUp(userData) {
