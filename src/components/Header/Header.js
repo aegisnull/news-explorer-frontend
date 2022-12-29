@@ -26,11 +26,11 @@ function Header(props) {
   const logOutIcon =
     currentPath === "/saved-news" ? "header__user_light" : "header__user_dark";
 
-  const currentUser = React.useContext(CurrentUserContext);
-
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <header className="header">
