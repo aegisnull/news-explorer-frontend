@@ -6,12 +6,14 @@ import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
 import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
   const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
 
   function handleSignUpClick() {
     setSignUpPopupOpen(true);
@@ -56,34 +58,39 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <SignInPopup
-        isOpen={isSignInPopupOpen}
-        onClose={closeAllPopups}
-        onRegister={handleSignUpClick}
-      />
-      <SignUpPopup
-        isOpen={isSignUpPopupOpen}
-        onClose={closeAllPopups}
-        isRegisterOpen
-        onSuccess={handleSuccessClick}
-      />
-
-      <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} />
-
-      <Routes>
-        <Route path="/" element={<Main onSignInClick={handleSignInClick} />} />
-        <Route
-          path="/saved-news"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <SavedNews onSignInClick={handleSignInClick} />
-            </ProtectedRoute>
-          }
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
+        <SignInPopup
+          isOpen={isSignInPopupOpen}
+          onClose={closeAllPopups}
+          onRegister={handleSignUpClick}
         />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </div>
+        <SignUpPopup
+          isOpen={isSignUpPopupOpen}
+          onClose={closeAllPopups}
+          isRegisterOpen
+          onSuccess={handleSuccessClick}
+        />
+
+        <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} />
+
+        <Routes>
+          <Route
+            path="/"
+            element={<Main onSignInClick={handleSignInClick} />}
+          />
+          <Route
+            path="/saved-news"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SavedNews onSignInClick={handleSignInClick} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
