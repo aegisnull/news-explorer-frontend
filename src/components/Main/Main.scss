@@ -1,0 +1,80 @@
+.main {
+  height: 576px;
+  color: white;
+  background-image: url(../../images/main__image.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__container {
+    width: 608px;
+    margin: auto;
+    padding: 0;
+  }
+
+  &__title {
+    font-family: "Roboto-Slab", serif;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 64px;
+    width: 80%;
+    margin: 0;
+    padding-top: 80px;
+  }
+
+  &__subtitle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0;
+    padding-top: 32px;
+  }
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 500px;
+
+@media screen and (max-width: $breakpoint-tablet) {
+  .main {
+    height: 400px;
+    background-position-x: 40%;
+
+    &__container {
+      width: 452px;
+    }
+
+    &__title {
+      font-size: 36px;
+      line-height: 40px;
+      width: 60%;
+      padding-top: 38px;
+    }
+
+    &__subtitle {
+      padding-top: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .main {
+    height: 536px;
+    background-position-x: center;
+    padding-top: 0;
+
+    &__container {
+      width: 90vw;
+    }
+
+    &__title {
+      font-size: 32px;
+      width: 100%;
+      padding-top: 30px;
+    }
+
+    &__subtitle {
+      font-size: 20px;
+      padding-top: 16px;
+    }
+  }
+}

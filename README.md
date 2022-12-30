@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# NewsExplorer Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+NewsExplorer es un servicio que permite buscar noticias por palabra clave y guardarlas en tu cuenta personal.
 
-## Available Scripts
+## Índice
 
-In the project directory, you can run:
+- [Empezando](#empezando)
+  - [Prerrequisitos](#prerrequisitos)
+  - [Instalación](#instalación)
+- [Uso](#uso)
+- [Despliegue](#despliegue)
 
-### `npm start`
+## Empezando
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para fines de desarrollo y prueba. Consulte [Despliegue](#despliegue) para obtener más información sobre cómo desplegar el proyecto en GitHub Pages.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerrequisitos
 
-### `npm test`
+Una lista de dependencias que requiere el proyecto, junto con enlaces a cualquier documentación relevante.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [React](https://reactjs.org/)
+- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+- [SASS](https://sass-lang.com/)
+- [gh-pages](https://www.npmjs.com/package/gh-pages)
+- [eslint](https://eslint.org/)
 
-### `npm run build`
+### Instalación
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Instrucciones paso a paso para instalar las dependencias y configurar el proyecto:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone el repositorio: `git clone https://github.com/aegisnull/news-explorer-frontend.git`
+2. Instale las dependencias: `npm install`
+3. Cree el proyecto: `npm run build`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Uso
 
-### `npm run eject`
+Los comandos para ejecutar el proyecto en modo de desarrollo y producción:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `npm run start` - Ejecuta el proyecto en modo de desarrollo.
+- `npm run build` - Crea el proyecto en modo de producción.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Despliegue
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Instrucciones para desplegar el proyecto en GitHub Pages:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Dado que el proyecto se despliega en GitHub Pages, es necesario configurar el archivo `package.json` para que el script `deploy` apunte a la rama `gh-pages`:
 
-## Learn More
+```json
+"scripts": {
+  "deploy": "gh-pages -d build -b gh-pages"
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Una vez configurado, el proyecto se puede desplegar ejecutando el comando `npm run deploy`.

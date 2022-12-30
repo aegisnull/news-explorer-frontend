@@ -1,0 +1,176 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  visibility: hidden;
+
+  &_active {
+    visibility: visible;
+  }
+
+  &__container {
+    width: 430px;
+    height: 380px;
+    background-color: #fff;
+    border-radius: 16px;
+    position: relative;
+
+    &_register {
+      height: 458px;
+    }
+
+    &_success {
+      height: 182px;
+    }
+  }
+
+  &__close-button {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    background-image: url(../../images/close-button.svg);
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  &__title {
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 28px;
+    color: #1a1b22;
+    margin: 0;
+    padding-top: 34px;
+
+    &_success {
+      width: 315px;
+      padding-left: 36px;
+    }
+  }
+  &__form {
+    padding-left: 36px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  &__submit-button {
+    width: 358px;
+    height: 64px;
+    background-color: #2f71e5;
+    border-radius: 100px;
+    border: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 39px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0;
+    margin: 10px 0 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color: #1a1b22;
+  }
+
+  &__label {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #2f71e5;
+    padding: 0;
+    margin: 30px 0 0;
+
+    &_success {
+      display: block;
+      padding-left: 36px;
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    display: block;
+    padding-top: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: auto;
+  }
+
+  &__blue {
+    color: #2f71e5;
+  }
+}
+
+$breakpoint-mobile: 500px;
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .popup {
+    &__close-button {
+      top: -45px;
+      right: 16px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &__container {
+      width: 100vw;
+      height: 93vh;
+      border-radius: 16px 16px 0 0;
+      bottom: -8%;
+    }
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+      padding-top: 16px;
+      width: 100%;
+    }
+    &__form {
+      padding-left: 24px;
+      width: 87%;
+    }
+    &__submit-button {
+      width: 100%;
+      height: 56px;
+      margin-top: 24px;
+    }
+    &__input {
+      width: 100%;
+    }
+    &__label {
+      margin: 24px 0 0;
+    }
+    &__link {
+      padding-top: 8px;
+    }
+  }
+}

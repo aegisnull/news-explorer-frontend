@@ -1,0 +1,194 @@
+.header {
+  height: 80px;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  &__container {
+    width: 80%;
+    max-width: 1366px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__mobile-menu {
+    background: transparent;
+    border: none;
+    display: none;
+  }
+
+  &__nav {
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    align-items: center;
+    gap: 45px;
+  }
+
+  &__logo {
+    cursor: pointer;
+  }
+
+  &__text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__link {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+
+    &_light {
+      color: black;
+    }
+  }
+
+  &__button {
+    padding: 11px 25px;
+    border: 1px solid white;
+    border-radius: 100px;
+    background-color: transparent;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: white;
+      color: black;
+      transition: 0.3s;
+    }
+
+    &_light {
+      padding: 11px 25px;
+      border: 1px solid black;
+      border-radius: 100px;
+      background-color: transparent;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: black;
+        color: white;
+        transition: 0.3s;
+      }
+    }
+  }
+
+  &__user_light {
+    &::after {
+      content: url(../../images/logout_black.svg);
+      margin-left: 15px;
+      transform: translate(0, 2px);
+    }
+    &:hover::after {
+      content: url(../../images/logout.svg);
+    }
+  }
+
+  &__user_dark {
+    &::after {
+      content: url(../../images/logout.svg);
+      margin-left: 15px;
+      transform: translate(0, 2px);
+    }
+    &:hover::after {
+      content: url(../../images/logout_black.svg);
+    }
+  }
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 500px;
+
+@media screen and (max-width: $breakpoint-tablet) {
+  .header {
+    height: 66px;
+
+    &__container {
+      width: 90%;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+    &__nav {
+      gap: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .header {
+    height: 56px;
+    z-index: 1;
+
+    &__container {
+      width: 90%;
+      z-index: 1;
+    }
+
+    &__text {
+      font-size: 14px;
+    }
+
+    &__link {
+      display: none;
+    }
+
+    &__button {
+      display: none;
+
+      &_light {
+        display: none;
+      }
+    }
+
+    &__mobile-menu {
+      display: block;
+    }
+  }
+
+  .dropdown {
+    width: 100vw;
+    height: 230px;
+    background-color: black;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .header__nav_dropdown {
+    flex-direction: column;
+  }
+
+  .header__link_dropdown1 {
+    display: block;
+    padding-left: 16px;
+    padding-top: 81px;
+  }
+
+  .header__link_dropdown2 {
+    display: block;
+    padding-left: 16px;
+  }
+
+  .header__text_dropdown {
+    display: block;
+    margin: auto;
+    width: 90vw;
+    margin-top: 32px;
+  }
+}
