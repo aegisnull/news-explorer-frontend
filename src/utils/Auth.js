@@ -1,7 +1,7 @@
 // Description: temporary use of the Practicum API for authorization and registration of users on the site.
 
-const BaseUrl = "https://register.nomoreparties.co";
-//const BaseUrl = "https://api.aegisnews.students.nomoredomainssbs.ru";
+//const BaseUrl = "https://register.nomoreparties.co";
+const BaseUrl = "https://api.aegisnews.students.nomoredomainssbs.ru";
 const Headers = { "Content-Type": "application/json" };
 
 function register(user) {
