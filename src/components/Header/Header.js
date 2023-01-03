@@ -106,7 +106,7 @@ function Header(props) {
                   className={`${buttonColor} header__text ${logOutIcon}`}
                   onClick={props.letLogOut}
                 >
-                  {currentUser.data.email}
+                  {currentUser.data.name}
                 </button>
                 <button className="header__mobile-menu" onClick={toggleMenu}>
                   <img

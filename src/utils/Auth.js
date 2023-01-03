@@ -1,7 +1,7 @@
 // Description: temporary use of the Practicum API for authorization and registration of users on the site.
 
-//const BaseUrl = "https://register.nomoreparties.co";
-const BaseUrl = "https://api.aegisnews.students.nomoredomainssbs.ru";
+const BaseUrl = "https://register.nomoreparties.co";
+//const BaseUrl = "https://api.aegisnews.students.nomoredomainssbs.ru";
 const Headers = { "Content-Type": "application/json" };
 
 function register(user) {
@@ -11,7 +11,7 @@ function register(user) {
     body: JSON.stringify({
       email: user.email,
       password: user.password,
-      name: user.name,
+      name: user.name
     }),
   }).then(checkResponse);
 }
@@ -22,7 +22,7 @@ function authenticate(user) {
     method: "POST",
     body: JSON.stringify({
       email: user.email,
-      password: user.password,
+      password: user.password
     }),
   }).then(checkResponse);
 }
@@ -52,7 +52,7 @@ function saveNews(token, news) {
       date: news.date,
       source: news.source,
       link: news.link,
-      image: news.image,
+      image: news.image
     }),
   }).then(checkResponse);
 }

@@ -10,7 +10,7 @@ function SignInPopup(props) {
     e.preventDefault();
     props.onSubmit({
       email: inputs.email,
-      password: inputs.password,
+      password: inputs.password
     });
     setInputs({});
   }

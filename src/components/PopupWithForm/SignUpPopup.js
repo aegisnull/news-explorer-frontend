@@ -11,6 +11,7 @@ function SignUpPopup(props) {
     props.onSubmit({
       email: inputs.email,
       password: inputs.password,
+      name: inputs.username
     });
     setInputs({});
   }

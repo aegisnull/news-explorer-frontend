@@ -36,7 +36,7 @@ async function authenticate(user: {
       method: "POST",
       body: JSON.stringify({
         email: user.email,
-        password: user.password,
+        password: user.password
       }),
     });
     return checkResponse(res);
@@ -103,9 +103,7 @@ async function saveNews(
   }
 }
 
-async function getNews(
-  token: string
-): Promise<
+async function getNews(token: string): Promise<
   {
     keyword: string,
     title: string,
