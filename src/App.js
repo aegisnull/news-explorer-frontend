@@ -7,8 +7,7 @@ import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
-import { register, authenticate, validateToken } from "./utils/Auth";
-import MainApi from "../../utils/MainApi.js";
+import MainApi from "./utils/MainApi";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
