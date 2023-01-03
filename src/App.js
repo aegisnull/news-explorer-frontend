@@ -66,7 +66,7 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser({});
-    closeAllPopups;
+    closeAllPopups();
   }
 
   function handleSignUpClick() {
