@@ -41,4 +41,34 @@ function checkResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-export { register, authenticate, validateToken };
+function saveNews(token, news) {
+  return fetch(BaseUrl + "/articles", {
+    headers: { ...Headers, Authorization: "Bearer " + token },
+    method: "POST",
+    body: JSON.stringify({
+      keyword: news.keyword,
+      title: news.title,
+      text: news.text,
+      date: news.date,
+      source: news.source,
+      link: news.link,
+      image: news.image,
+    }),
+  }).then(checkResponse);
+}
+
+function getNews(token) {
+  return fetch(BaseUrl + "/articles", {
+    headers: { ...Headers, Authorization: "Bearer " + token },
+    method: "GET",
+  }).then(checkResponse);
+}
+
+function deleteNews(token, id) {
+  return fetch(BaseUrl + "/articles/" + id, {
+    headers: { ...Headers, Authorization: "Bearer " + token },
+    method: "DELETE",
+  }).then(checkResponse);
+}
+
+export { register, authenticate, validateToken, saveNews, getNews, deleteNews };
