@@ -7,7 +7,7 @@ function NewsCard() {
   const news = React.useContext(NewsContext);
 
   const [currentPage, setCurrentPage] = React.useState(1);
-  const cardsPerPage = 3;
+  const cardsPerPage = 6;
   const maxPage = Math.ceil(news.length / cardsPerPage);
 
   const handleNextPage = () => {
