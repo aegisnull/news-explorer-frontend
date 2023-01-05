@@ -23,7 +23,12 @@ function Main(props) {
     setIsLoading(true);
     getNews(searchInput)
       .then((res) => {
-        setNews(res);
+        const newsWithQuery = res.map((item) => ({
+          ...item,
+          keyword: searchInput,
+        }));
+        setNews(newsWithQuery);
+        console.log(newsWithQuery);
       })
       .finally(() => {
         setIsLoading(false);

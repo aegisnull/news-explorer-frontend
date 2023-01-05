@@ -41,6 +41,7 @@ function NewsCard(props) {
               publishedAt={news.publishedAt}
               content={news.content}
               source={news.source.name}
+              keyword={news.keyword}
               key={index}
               isLoggedIn={props.isLoggedIn}
             />
@@ -90,7 +91,13 @@ function Card(props) {
 
     if (saveButton.classList.contains("card__save-button_saved")) {
       MainApi.saveArticle(jwt, {
-        props,
+        keyword: props.keyword,
+        title: props.title,
+        text: props.content,
+        date: props.publishedAt,
+        source: props.source,
+        link: props.url,
+        image: props.urlToImage,
       })
         .then((res) => {
           console.log(res);
@@ -117,7 +124,7 @@ function Card(props) {
       ref={cardRef}
     >
       <button className="card__save-button" onClick={handleSaveClick} />
-      <button className="card__keyword-button"></button>
+      <button className="card__keyword-button">{props.keyword}</button>
       {props.isLoggedIn ? (
         <></>
       ) : (
