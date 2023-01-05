@@ -20,7 +20,7 @@ function App() {
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      MainApi.getUserData(jwt)
+      MainApi.validateToken(jwt)
         .then((res) => {
           if (res) {
             setCurrentUser(res);

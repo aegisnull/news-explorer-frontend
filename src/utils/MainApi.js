@@ -19,19 +19,25 @@ class MainApiClass {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password, name }),
-    }).then((res) => {
-      if (res.status === 400) {
-        throw new Error("Formato de correo electrónico o contraseña incorrecto");
-      } else if (res.status === 409) {
-        throw new Error("Esta cuenta ya existe");
-      }
-      return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.status === 400) {
+          throw new Error("Formato de correo electrónico o contraseña incorrecto");
+        } else if (res.status === 409) {
+          throw new Error("Esta cuenta ya existe");
+        } else if (res.status !== 200) {
+          throw new Error("Ha ocurrido un error inesperado");
+        }
+        return res.json();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   signIn(email, password) {
     if (!email || !password) {
-      throw new Error("Por favor ingresa email y contraseña válidos");
+      return Promise.reject(new Error("Por favor ingresa email y contraseña válidos"));
     }
     return fetch(`${this._url}/signin`, {
       method: "POST",
@@ -47,6 +53,8 @@ class MainApiClass {
           throw new Error("Email o contraseña incorrectos");
         } else if (res.status === 404) {
           throw new Error("Usuario no encontrado");
+        } else if (res.status !== 200) {
+          throw new Error("Ha ocurrido un error inesperado");
         }
         return res.json();
       })
@@ -59,8 +67,15 @@ class MainApiClass {
           };
         }
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
+        return Promise.reject(error);
       });
   }
+
+
+
   
   getUserData(jwt) {
     return fetch(`${this._url}/users/me`, {
@@ -74,8 +89,33 @@ class MainApiClass {
         throw new Error("Ha ocurrido un error inesperado");
       }
       return res.json();
+    })
+    .catch((error) => {
+      console.error(error);
     });
   }
+
+  validateToken(jwt) {
+    return fetch(`${this._url}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${jwt}`,
+      },
+    }).then((res) => {
+      if (res.status === 401) {
+        throw new Error("Token invalido");
+      } else if (res.status !== 200) {
+        throw new Error("Ha ocurrido un error inesperado");
+      }
+      return res.json();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+
   getSavedArticles(jwt) {
     return fetch(`${this._url}/articles`, {
       method: "GET",
