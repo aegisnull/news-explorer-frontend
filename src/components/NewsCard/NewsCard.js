@@ -78,8 +78,39 @@ function Card(props) {
   } `;
 
   function handleSaveClick() {
+    const jwt = localStorage.getItem("jwt");
     // on click toggle the isSaved state
     setIsSaved(!isSaved);
+
+    // if the card is saved, delete it from the saved articles
+    if (isSaved) {
+      MainApi.deleteArticle(jwt, props.id)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    // if the card is not saved, save it to the saved articles
+    else {
+      MainApi.saveArticle(jwt, {
+        keyword: props.keyword,
+        title: props.title,
+        text: props.content,
+        date: props.publishedAt,
+        source: props.source,
+        link: props.url,
+        image: props.urlToImage,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   function showTooltip(cardElement) {
