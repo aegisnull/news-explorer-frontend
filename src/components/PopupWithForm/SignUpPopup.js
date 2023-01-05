@@ -8,11 +8,11 @@ function SignUpPopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSubmit({
-      email: inputs.email,
-      password: inputs.password,
-      name: inputs.username
-    });
+    props.onSubmit(
+      inputs.email,
+      inputs.password,
+      inputs.username
+    );
     setInputs({});
   }
 

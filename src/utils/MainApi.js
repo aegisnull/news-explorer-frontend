@@ -29,8 +29,10 @@ class MainApiClass {
     });
   }
 
-  // авторизация
   signIn(email, password) {
+    if (!email || !password) {
+      throw new Error("Por favor ingresa email y contraseña válidos");
+    }
     return fetch(`${this._url}/signin`, {
       method: "POST",
       headers: {
@@ -40,13 +42,11 @@ class MainApiClass {
     })
       .then((res) => {
         if (res.status === 400) {
-          throw new Error("No se encontró el usuario con este correo electrónico");
+          throw new Error("Email invalido o formato de contraseña incorrecto");
         } else if (res.status === 401) {
-          throw new Error("Datos ingresados no son correctos");
+          throw new Error("Email o contraseña incorrectos");
         } else if (res.status === 404) {
-          throw new Error(
-            "No se encontró el usuario con este correo electrónico o la contraseña es incorrecta"
-          );
+          throw new Error("Usuario no encontrado");
         }
         return res.json();
       })
@@ -58,11 +58,10 @@ class MainApiClass {
             authorization: `Bearer ${localStorage.getItem("jwt")}`,
           };
         }
-
         return data;
       });
   }
-
+  
   getUserData(jwt) {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
