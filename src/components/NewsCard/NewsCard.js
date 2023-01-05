@@ -3,7 +3,7 @@ import { NewsContext } from "../../contexts/NewsContext";
 import "./NewsCard.scss";
 import NoResults from "../NoResults/NoResults";
 
-function NewsCard() {
+function NewsCard(props) {
   const news = React.useContext(NewsContext);
 
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -32,7 +32,7 @@ function NewsCard() {
       <div className="cards-container">
         {news
           .slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
-          .map((news, index) => (
+          .map((news) => (
             <Card
               title={news.title}
               urlToImage={news.urlToImage}
@@ -40,7 +40,8 @@ function NewsCard() {
               publishedAt={news.publishedAt}
               content={news.content}
               source={news.source.name}
-              key={index}
+              key={news.id}
+              isLoggedIn={props.isLoggedIn}
             />
           ))}
         <div className="cards-container__view-more-container">
@@ -87,9 +88,13 @@ function Card(props) {
     >
       <button className="card__save-button" />
       <button className="card__keyword-button"></button>
-      <button className="card__hover-text">
-        Inicia sesión para guardar artículos
-      </button>
+      {props.isLoggedIn ? (
+        ""
+      ) : (
+        <button className="card__hover-text">
+          Inicia sesión para guardar artículos
+        </button>
+      )}
       <a
         href={props.url}
         target="_blank"

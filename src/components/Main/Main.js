@@ -51,7 +51,11 @@ function Main(props) {
         </div>
       </section>
       <NewsContext.Provider value={news}>
-        {isSearching ? <NewsCardList isLoading={isLoading} /> : ""}
+        {isSearching ? (
+          <NewsCardList isLoading={isLoading} isLoggedIn={props.isLoggedIn} />
+        ) : (
+          ""
+        )}
       </NewsContext.Provider>
       <About />
       <Footer />
