@@ -79,6 +79,12 @@ function Card(props) {
     showTooltip(event.currentTarget);
   };
 
+  function handleSaveClick() {
+    const cardElement = cardRef.current;
+    const saveButton = cardElement.querySelector(".card__save-button");
+    saveButton.classList.toggle("card__save-button_saved");
+  }
+
   return (
     <article
       className="card"
@@ -86,7 +92,7 @@ function Card(props) {
       onMouseLeave={handleCardHover}
       ref={cardRef}
     >
-      <button className="card__save-button" />
+      <button className="card__save-button" onClick={handleSaveClick} />
       <button className="card__keyword-button"></button>
       {props.isLoggedIn ? (
         ""
