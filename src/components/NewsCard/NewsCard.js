@@ -71,6 +71,16 @@ function NewsCard(props) {
 
 function Card(props) {
   const cardRef = React.useRef(null);
+  const [isSaved, setIsSaved] = React.useState(false);
+
+  const cardSaveButtonClassName = `card__save-button ${
+    isSaved ? "card__save-button_saved" : ""
+  } `;
+
+  function handleSaveClick() {
+    // on click toggle the isSaved state
+    setIsSaved(!isSaved);
+  }
 
   function showTooltip(cardElement) {
     const tooltip = cardElement.querySelector(".card__hover-text");
@@ -83,7 +93,7 @@ function Card(props) {
     }
   }
 
-  function handleSaveClick() {
+  /* function handleSaveClick() {
     const jwt = localStorage.getItem("jwt");
     const cardElement = cardRef.current;
     const saveButton = cardElement.querySelector(".card__save-button");
@@ -114,7 +124,7 @@ function Card(props) {
           console.log(err);
         });
     }
-  }
+  } */
 
   return (
     <article
@@ -123,7 +133,7 @@ function Card(props) {
       onMouseLeave={handleCardHover}
       ref={cardRef}
     >
-      <button className="card__save-button" onClick={handleSaveClick} />
+      <button className={cardSaveButtonClassName} onClick={handleSaveClick} />
       <button className="card__keyword-button">{props.keyword}</button>
       {props.isLoggedIn ? (
         <></>
