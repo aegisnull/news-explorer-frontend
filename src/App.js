@@ -36,7 +36,7 @@ function App() {
   function handleSignUp(email, password, name) {
     MainApi.signUp(email, password, name)
       .then((user) => {
-        if (user.data._id) {
+        if (user._id) {
           setIsSuccess(true);
         } else {
           setIsSuccess(false);
