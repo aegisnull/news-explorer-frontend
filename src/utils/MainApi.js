@@ -106,7 +106,7 @@ class MainApiClass {
     });
   }
 
-  postArticle(jwt, { keyword, title, text, date, source, link, image }) {
+  saveArticle(jwt, { keyword, title, text, date, source, link, image }) {
     return fetch(`${this._url}/articles`, {
       method: "POST",
       headers: {

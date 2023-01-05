@@ -2,6 +2,7 @@ import React from "react";
 import { NewsContext } from "../../contexts/NewsContext";
 import "./NewsCard.scss";
 import NoResults from "../NoResults/NoResults";
+import MainApi from "../../utils/MainApi";
 
 function NewsCard(props) {
   const news = React.useContext(NewsContext);
@@ -32,7 +33,7 @@ function NewsCard(props) {
       <div className="cards-container">
         {news
           .slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
-          .map((news) => (
+          .map((news, index) => (
             <Card
               title={news.title}
               urlToImage={news.urlToImage}
@@ -40,7 +41,7 @@ function NewsCard(props) {
               publishedAt={news.publishedAt}
               content={news.content}
               source={news.source.name}
-              key={news.id}
+              key={index}
               isLoggedIn={props.isLoggedIn}
             />
           ))}
@@ -75,14 +76,37 @@ function Card(props) {
     tooltip.classList.toggle("card__hover-text_active");
   }
 
-  const handleCardHover = (event) => {
-    showTooltip(event.currentTarget);
-  };
+  function handleCardHover(event) {
+    if (!props.isLoggedIn) {
+      showTooltip(event.currentTarget);
+    }
+  }
 
   function handleSaveClick() {
+    const jwt = localStorage.getItem("jwt");
     const cardElement = cardRef.current;
     const saveButton = cardElement.querySelector(".card__save-button");
     saveButton.classList.toggle("card__save-button_saved");
+
+    if (saveButton.classList.contains("card__save-button_saved")) {
+      MainApi.saveArticle(jwt, {
+        props,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      MainApi.deleteArticle(jwt, props.id)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   return (
@@ -95,7 +119,7 @@ function Card(props) {
       <button className="card__save-button" onClick={handleSaveClick} />
       <button className="card__keyword-button"></button>
       {props.isLoggedIn ? (
-        ""
+        <></>
       ) : (
         <button className="card__hover-text">
           Inicia sesión para guardar artículos
