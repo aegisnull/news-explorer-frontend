@@ -74,27 +74,6 @@ class MainApiClass {
       });
   }
 
-
-
-  
-  getUserData(jwt) {
-    return fetch(`${this._url}/users/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
-      },
-    }).then((res) => {
-      if (res.status !== 200) {
-        throw new Error("Ha ocurrido un error inesperado");
-      }
-      return res.json();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
-
   validateToken(jwt) {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
@@ -114,7 +93,6 @@ class MainApiClass {
       console.error(error);
     });
   }
-
 
   getSavedArticles(jwt) {
     return fetch(`${this._url}/articles`, {
