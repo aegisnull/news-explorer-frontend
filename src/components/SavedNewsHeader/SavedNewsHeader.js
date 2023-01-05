@@ -1,15 +1,16 @@
 import React from "react";
 import "./SavedNewsHeader.scss";
+import { NewsContext } from "../../contexts/NewsContext";
 
 function SavedNewsHeader() {
-  const News = document.querySelectorAll(".card");
+  const savedNews = React.useContext(NewsContext);
 
   return (
     <section className="saved-news-header">
       <div className="saved-news-header__container">
         <h2 className="saved-news-header__title">Artículos guardados</h2>
         <p className="saved-news-header__subtitle">
-          Elise, tienes {News.length} artículos guardados
+          Elise, tienes {savedNews.length} artículos guardados
         </p>
         <p className="saved-news-header__keywords">
           Palabras clave:{" "}

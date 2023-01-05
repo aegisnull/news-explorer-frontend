@@ -1,12 +1,15 @@
 import React from "react";
 import "./NewsCard.scss";
-import SampleNews from "../../utils/SampleNews";
+//import SampleNews from "../../utils/SampleNews";
+import { NewsContext } from "../../contexts/NewsContext";
 
 function SavedCards() {
+  const savedNews = React.useContext(NewsContext);
+
   return (
     <>
       <div className="cards-container cards-container_saved">
-        {SampleNews.map((news) => (
+        {savedNews.map((news) => (
           <Card
             key={news.id}
             url={news.url}
