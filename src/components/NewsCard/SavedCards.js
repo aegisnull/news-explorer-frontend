@@ -1,7 +1,7 @@
 import React from "react";
 import "./NewsCard.scss";
-//import SampleNews from "../../utils/SampleNews";
 import { NewsContext } from "../../contexts/NewsContext";
+import MainApi from "../../utils/MainApi";
 
 function SavedCards() {
   const savedNews = React.useContext(NewsContext);
@@ -18,6 +18,7 @@ function SavedCards() {
             content={savedNews.text}
             source={savedNews.source}
             keyword={savedNews.keyword}
+            id={savedNews._id}
             key={index}
           />
         ))}
@@ -38,13 +39,27 @@ function Card(props) {
     }
   }
 
+  function deleteArticle() {
+    const jwt = localStorage.getItem("jwt");
+    MainApi.deleteArticle(jwt, props.id)
+      .then((res) => {
+        console.log(res);
+      })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <article
       className="card"
       onMouseEnter={handleCardHover}
       onMouseLeave={handleCardHover}
     >
-      <button className="card__trash-button" />
+      <button className="card__trash-button" onClick={deleteArticle} />
       <button className="card__keyword-button"></button>
       <div className="card__keyword-container">{props.keyword}</div>
       <button className="card__hover-text">Remove from saved</button>
