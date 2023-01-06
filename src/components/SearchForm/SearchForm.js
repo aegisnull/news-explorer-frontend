@@ -1,5 +1,5 @@
-import React from "react";
-import "./SearchForm.scss";
+import React from 'react';
+import './SearchForm.scss';
 
 function SearchForm(props) {
   function handleSubmit(e) {

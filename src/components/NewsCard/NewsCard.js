@@ -1,8 +1,8 @@
-import React from "react";
-import { NewsContext } from "../../contexts/NewsContext";
-import "./NewsCard.scss";
-import NoResults from "../NoResults/NoResults";
-import MainApi from "../../utils/MainApi";
+import React from 'react';
+import { NewsContext } from '../../contexts/NewsContext';
+import './NewsCard.scss';
+import NoResults from '../NoResults/NoResults';
+import MainApi from '../../utils/MainApi';
 
 function NewsCard(props) {
   const news = React.useContext(NewsContext);
@@ -34,10 +34,7 @@ function NewsCard(props) {
           />
         ))}
         <div className="cards-container__view-more-container">
-          <button
-            className="cards-container__view-more"
-            onClick={handleViewMoreClick}
-          >
+          <button className="cards-container__view-more" onClick={handleViewMoreClick}>
             Ver más
           </button>
         </div>
@@ -50,12 +47,10 @@ function Card(props) {
   const cardRef = React.useRef(null);
   const [isSaved, setIsSaved] = React.useState(false);
 
-  const cardSaveButtonClassName = `card__save-button ${
-    isSaved ? "card__save-button_saved" : ""
-  } `;
+  const cardSaveButtonClassName = `card__save-button ${isSaved ? 'card__save-button_saved' : ''} `;
 
   function handleSaveClick() {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     // on click toggle the isSaved state
     setIsSaved(!isSaved);
 
@@ -65,7 +60,7 @@ function Card(props) {
       MainApi.compareArticles(jwt, props.title)
         .then((res) => {
           console.log(res);
-          if (res.message === "Article not found") {
+          if (res.message === 'Article not found') {
             MainApi.saveArticle(jwt, {
               keyword: props.keyword,
               title: props.title,
@@ -73,7 +68,7 @@ function Card(props) {
               date: props.publishedAt,
               source: props.source,
               link: props.url,
-              image: props.urlToImage,
+              image: props.urlToImage
             })
               .then((res) => {
                 console.log(res);
@@ -99,8 +94,8 @@ function Card(props) {
   }
 
   function showTooltip(cardElement) {
-    const tooltip = cardElement.querySelector(".card__hover-text");
-    tooltip.classList.toggle("card__hover-text_active");
+    const tooltip = cardElement.querySelector('.card__hover-text');
+    tooltip.classList.toggle('card__hover-text_active');
   }
 
   function handleCardHover(event) {
@@ -114,30 +109,22 @@ function Card(props) {
       className="card"
       onMouseEnter={handleCardHover}
       onMouseLeave={handleCardHover}
-      ref={cardRef}
-    >
+      ref={cardRef}>
       <button className={cardSaveButtonClassName} onClick={handleSaveClick} />
       <button className="card__keyword-button">{props.keyword}</button>
       {props.isLoggedIn ? (
         <></>
       ) : (
-        <button className="card__hover-text">
-          Inicia sesión para guardar artículos
-        </button>
+        <button className="card__hover-text">Inicia sesión para guardar artículos</button>
       )}
-      <a
-        href={props.url}
-        target="_blank"
-        rel="noreferrer"
-        className="card__link"
-      >
+      <a href={props.url} target="_blank" rel="noreferrer" className="card__link">
         <img className="card__image" src={props.urlToImage} alt={props.title} />
         <div className="card__container">
           <p className="card__date">
-            {new Date(props.publishedAt).toLocaleDateString("es-MX", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
+            {new Date(props.publishedAt).toLocaleDateString('es-MX', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric'
             })}
           </p>
           <h3 className="card__title">{props.title}</h3>

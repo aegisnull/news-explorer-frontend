@@ -1,17 +1,17 @@
-import React from "react";
-import "./SavedNews.scss";
-import Header from "../Header/Header";
-import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
-import NewsCardList from "../NewsCardList/NewsCardList";
-import Footer from "../Footer/Footer";
-import MainApi from "../../utils/MainApi";
-import { NewsContext } from "../../contexts/NewsContext";
+import React from 'react';
+import './SavedNews.scss';
+import Header from '../Header/Header';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import NewsCardList from '../NewsCardList/NewsCardList';
+import Footer from '../Footer/Footer';
+import MainApi from '../../utils/MainApi';
+import { NewsContext } from '../../contexts/NewsContext';
 
 function SavedNews(props) {
   const [savedNews, setSavedNews] = React.useState([]);
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
 
     getSavedArticles(jwt);
   }, []);

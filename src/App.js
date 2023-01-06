@@ -1,13 +1,13 @@
-import Main from "./components/Main/Main";
-import SavedNews from "./components/SavedNews/SavedNews";
-import { Routes, Route, Navigate } from "react-router-dom";
-import SignInPopup from "./components/PopupWithForm/SignInPopup";
-import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
-import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
-import React from "react";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import { CurrentUserContext } from "./contexts/CurrentUserContext";
-import MainApi from "./utils/MainApi";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import Main from './components/Main/Main';
+import SavedNews from './components/SavedNews/SavedNews';
+import SignInPopup from './components/PopupWithForm/SignInPopup';
+import SignUpPopup from './components/PopupWithForm/SignUpPopup';
+import SuccessPopup from './components/PopupWithForm/SuccessPopup';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from './contexts/CurrentUserContext';
+import MainApi from './utils/MainApi';
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
@@ -18,7 +18,7 @@ function App() {
   const [isSuccess, setIsSuccess] = React.useState(false);
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       MainApi.validateToken(jwt)
         .then((res) => {
@@ -63,7 +63,7 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     setCurrentUser({});
     closeAllPopups();
@@ -91,23 +91,23 @@ function App() {
   }
 
   function closeByEsc(evt) {
-    if (evt.key === "Escape") {
+    if (evt.key === 'Escape') {
       closeAllPopups();
     }
   }
 
   function closeByOverlay(evt) {
-    if (evt.target.classList.contains("popup")) {
+    if (evt.target.classList.contains('popup')) {
       closeAllPopups();
     }
   }
 
   React.useEffect(() => {
-    document.addEventListener("keydown", closeByEsc);
-    document.addEventListener("click", closeByOverlay);
+    document.addEventListener('keydown', closeByEsc);
+    document.addEventListener('click', closeByOverlay);
     return () => {
-      document.removeEventListener("keydown", closeByEsc);
-      document.removeEventListener("click", closeByOverlay);
+      document.removeEventListener('keydown', closeByEsc);
+      document.removeEventListener('click', closeByOverlay);
     };
   });
 

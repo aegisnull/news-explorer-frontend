@@ -1,11 +1,11 @@
 // Description: temporary use of the Practicum API for authorization and registration of users on the site.
 
-//const BaseUrl = "https://register.nomoreparties.co";
+// const BaseUrl = "https://register.nomoreparties.co";
 const BaseUrl = "https://api.aegisnews.students.nomoredomainssbs.ru";
 const Headers = { "Content-Type": "application/json" };
 
 function register(user) {
-  return fetch(BaseUrl + "/signup", {
+  return fetch(`${BaseUrl  }/signup`, {
     headers: Headers,
     method: "POST",
     body: JSON.stringify({
@@ -17,7 +17,7 @@ function register(user) {
 }
 
 function authenticate(user) {
-  return fetch(BaseUrl + "/signin", {
+  return fetch(`${BaseUrl  }/signin`, {
     headers: Headers,
     method: "POST",
     body: JSON.stringify({
@@ -28,8 +28,8 @@ function authenticate(user) {
 }
 
 function validateToken(token) {
-  return fetch(BaseUrl + "/users/me", {
-    headers: { ...Headers, Authorization: "Bearer " + token },
+  return fetch(`${BaseUrl  }/users/me`, {
+    headers: { ...Headers, Authorization: `Bearer ${  token}` },
     method: "GET",
   }).then(checkResponse);
 }
@@ -42,8 +42,8 @@ function checkResponse(res) {
 }
 
 function saveNews(token, news) {
-  return fetch(BaseUrl + "/articles", {
-    headers: { ...Headers, Authorization: "Bearer " + token },
+  return fetch(`${BaseUrl  }/articles`, {
+    headers: { ...Headers, Authorization: `Bearer ${  token}` },
     method: "POST",
     body: JSON.stringify({
       keyword: news.keyword,
@@ -58,15 +58,15 @@ function saveNews(token, news) {
 }
 
 function getNews(token) {
-  return fetch(BaseUrl + "/articles", {
-    headers: { ...Headers, Authorization: "Bearer " + token },
+  return fetch(`${BaseUrl  }/articles`, {
+    headers: { ...Headers, Authorization: `Bearer ${  token}` },
     method: "GET",
   }).then(checkResponse);
 }
 
 function deleteNews(token, id) {
-  return fetch(BaseUrl + "/articles/" + id, {
-    headers: { ...Headers, Authorization: "Bearer " + token },
+  return fetch(`${BaseUrl  }/articles/${  id}`, {
+    headers: { ...Headers, Authorization: `Bearer ${  token}` },
     method: "DELETE",
   }).then(checkResponse);
 }

@@ -43,7 +43,7 @@ function SignInPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
+        <span className="popup__input-error" />
       </label>
       <label className="popup__label">
         Contraseña
@@ -56,7 +56,7 @@ function SignInPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
+        <span className="popup__input-error" />
       </label>
     </PopupWithForm>
   );

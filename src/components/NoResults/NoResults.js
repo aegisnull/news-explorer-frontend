@@ -1,5 +1,5 @@
-import React from "react";
-import "./NoResults.scss";
+import React from 'react';
+import './NoResults.scss';
 
 function NoResults() {
   return (

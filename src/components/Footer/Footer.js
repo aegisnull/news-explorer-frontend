@@ -1,7 +1,7 @@
-import React from "react";
-import "./Footer.scss";
-import GithubLogo from "../../images/github__logo.svg";
-import FacebookLogo from "../../images/facebook__logo.svg";
+import React from 'react';
+import './Footer.scss';
+import GithubLogo from '../../images/github__logo.svg';
+import FacebookLogo from '../../images/facebook__logo.svg';
 
 function Footer() {
   return (
@@ -16,16 +16,8 @@ function Footer() {
             <div className="footer__link">Practicum</div>
           </div>
           <div className="footer__socials">
-            <img
-              className="footer__social"
-              src={GithubLogo}
-              alt="Github Logo"
-            />
-            <img
-              className="footer__social"
-              src={FacebookLogo}
-              alt="Facebook Logo"
-            />
+            <img className="footer__social" src={GithubLogo} alt="Github Logo" />
+            <img className="footer__social" src={FacebookLogo} alt="Facebook Logo" />
           </div>
         </nav>
       </div>

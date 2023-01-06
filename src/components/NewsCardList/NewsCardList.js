@@ -1,23 +1,17 @@
-import React from "react";
-import "./NewsCardList.scss";
-import Preloader from "../Preloader/Preloader";
-import NewsCard from "../NewsCard/NewsCard";
-import SavedCards from "../NewsCard/SavedCards";
-import { useLocation } from "react-router-dom";
+import React from 'react';
+import './NewsCardList.scss';
+import { useLocation } from 'react-router-dom';
+import Preloader from '../Preloader/Preloader';
+import NewsCard from '../NewsCard/NewsCard';
+import SavedCards from '../NewsCard/SavedCards';
 
 function NewsCardList(props) {
   const currentPath = useLocation().pathname;
   const cardComponent =
-    currentPath === "/saved-news" ? (
-      <SavedCards />
-    ) : (
-      <NewsCard isLoggedIn={props.isLoggedIn} />
-    );
+    currentPath === '/saved-news' ? <SavedCards /> : <NewsCard isLoggedIn={props.isLoggedIn} />;
 
   return (
-    <section className="news-card-list">
-      {props.isLoading ? <Preloader /> : cardComponent}
-    </section>
+    <section className="news-card-list">{props.isLoading ? <Preloader /> : cardComponent}</section>
   );
 }
 

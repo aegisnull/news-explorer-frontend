@@ -1,5 +1,5 @@
-import React from "react";
-import "./About.scss";
+import React from 'react';
+import './About.scss';
 
 function About() {
   return (
@@ -13,15 +13,14 @@ function About() {
         <div className="about__info">
           <h1 className="about__title">Acerca del autor</h1>
           <p className="about__text">
-            Mi nombre es <strong>Luis Tellez</strong>, soy desarrollador web
-            Full Stack (MERN) y me dedico a la creación de sitios web y
-            aplicaciones web. Conocimientos en HTML, CSS, JavaScript, React,
-            Node.js, Express, MongoDB, MySQL, Git, GitHub, Bootstrap, Material
+            Mi nombre es <strong>Luis Tellez</strong>, soy desarrollador web Full Stack (MERN) y me
+            dedico a la creación de sitios web y aplicaciones web. Conocimientos en HTML, CSS,
+            JavaScript, React, Node.js, Express, MongoDB, MySQL, Git, GitHub, Bootstrap, Material
             UI, entre otras tecnologías.
           </p>
           <p className="about__text">
-            Mi experiencia en Practicum fue muy buena, aprendí mucho y me ayudó
-            a mejorar mis habilidades como desarrollador web.
+            Mi experiencia en Practicum fue muy buena, aprendí mucho y me ayudó a mejorar mis
+            habilidades como desarrollador web.
           </p>
         </div>
       </div>

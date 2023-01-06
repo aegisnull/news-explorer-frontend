@@ -1,36 +1,34 @@
-import React from "react";
-import "./NewsCard.scss";
-import { NewsContext } from "../../contexts/NewsContext";
-import MainApi from "../../utils/MainApi";
+import React from 'react';
+import './NewsCard.scss';
+import { NewsContext } from '../../contexts/NewsContext';
+import MainApi from '../../utils/MainApi';
 
 function SavedCards() {
   const savedNews = React.useContext(NewsContext);
 
   return (
-    <>
-      <div className="cards-container cards-container_saved">
-        {savedNews.map((savedNews, index) => (
-          <Card
-            title={savedNews.title}
-            urlToImage={savedNews.image}
-            url={savedNews.link}
-            publishedAt={savedNews.date}
-            content={savedNews.text}
-            source={savedNews.source}
-            keyword={savedNews.keyword}
-            id={savedNews._id}
-            key={index}
-          />
-        ))}
-      </div>
-    </>
+    <div className="cards-container cards-container_saved">
+      {savedNews.map((savedNews, index) => (
+        <Card
+          title={savedNews.title}
+          urlToImage={savedNews.image}
+          url={savedNews.link}
+          publishedAt={savedNews.date}
+          content={savedNews.text}
+          source={savedNews.source}
+          keyword={savedNews.keyword}
+          id={savedNews._id}
+          key={index}
+        />
+      ))}
+    </div>
   );
 }
 
 function Card(props) {
   function showTooltip(cardElement) {
-    const tooltip = cardElement.querySelector(".card__hover-text");
-    tooltip.classList.toggle("card__hover-text_active");
+    const tooltip = cardElement.querySelector('.card__hover-text');
+    tooltip.classList.toggle('card__hover-text_active');
   }
 
   function handleCardHover(event) {
@@ -40,7 +38,7 @@ function Card(props) {
   }
 
   function deleteArticle() {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     MainApi.deleteArticle(jwt, props.id)
       .then((res) => {
         console.log(res);
@@ -54,28 +52,19 @@ function Card(props) {
   }
 
   return (
-    <article
-      className="card"
-      onMouseEnter={handleCardHover}
-      onMouseLeave={handleCardHover}
-    >
+    <article className="card" onMouseEnter={handleCardHover} onMouseLeave={handleCardHover}>
       <button className="card__trash-button" onClick={deleteArticle} />
-      <button className="card__keyword-button"></button>
+      <button className="card__keyword-button" />
       <div className="card__keyword-container">{props.keyword}</div>
       <button className="card__hover-text">Remove from saved</button>
-      <a
-        href={props.url}
-        target="_blank"
-        rel="noreferrer"
-        className="card__link"
-      >
+      <a href={props.url} target="_blank" rel="noreferrer" className="card__link">
         <img className="card__image" src={props.urlToImage} alt={props.title} />
         <div className="card__container">
           <p className="card__date">
-            {new Date(props.publishedAt).toLocaleDateString("es-MX", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
+            {new Date(props.publishedAt).toLocaleDateString('es-MX', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric'
             })}
           </p>
           <h3 className="card__title">{props.title}</h3>
