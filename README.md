@@ -8,7 +8,7 @@ NewsExplorer es un servicio que permite buscar noticias por palabra clave y guar
   - [Prerrequisitos](#prerrequisitos)
   - [Instalación](#instalación)
 - [Uso](#uso)
-- [Despliegue](#despliegue)
+- [Enlaces](#enlaces)
 
 ## Empezando
 
@@ -39,16 +39,8 @@ Los comandos para ejecutar el proyecto en modo de desarrollo y producción:
 - `npm run start` - Ejecuta el proyecto en modo de desarrollo.
 - `npm run build` - Crea el proyecto en modo de producción.
 
-## Despliegue
+## Enlaces
 
-Instrucciones para desplegar el proyecto en GitHub Pages:
-
-Dado que el proyecto se despliega en GitHub Pages, es necesario configurar el archivo `package.json` para que el script `deploy` apunte a la rama `gh-pages`:
-
-```json
-"scripts": {
-  "deploy": "gh-pages -d build -b gh-pages"
-}
-```
-
-Una vez configurado, el proyecto se puede desplegar ejecutando el comando `npm run deploy`.
+- [Repositorio con código backend](https://github.com/aegisnull/news-explorer-backend)
+- [Sitio web](https://aegisnews.students.nomoredomainssbs.ru)
+- [API](https://api.aegisnews.students.nomoredomainssbs.ru)

@@ -23,7 +23,11 @@ function Main(props) {
     setIsLoading(true);
     getNews(searchInput)
       .then((res) => {
-        setNews(res);
+        const newsWithQuery = res.map((item) => ({
+          ...item,
+          keyword: searchInput,
+        }));
+        setNews(newsWithQuery);
       })
       .finally(() => {
         setIsLoading(false);
@@ -51,7 +55,11 @@ function Main(props) {
         </div>
       </section>
       <NewsContext.Provider value={news}>
-        {isSearching ? <NewsCardList isLoading={isLoading} /> : ""}
+        {isSearching ? (
+          <NewsCardList isLoading={isLoading} isLoggedIn={props.isLoggedIn} />
+        ) : (
+          ""
+        )}
       </NewsContext.Provider>
       <About />
       <Footer />

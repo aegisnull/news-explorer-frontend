@@ -205,6 +205,19 @@
       display: block;
     }
   }
+
+  &__keyword-container {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 14px;
+    top: 24px;
+    left: 24px;
+  }
 }
 
 $breakpoint-tablet: 1255px;

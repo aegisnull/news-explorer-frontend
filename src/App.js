@@ -7,7 +7,7 @@ import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
 import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
-import { register, authenticate, validateToken } from "./utils/Auth";
+import MainApi from "./utils/MainApi";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
@@ -20,7 +20,7 @@ function App() {
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      validateToken(jwt)
+      MainApi.validateToken(jwt)
         .then((res) => {
           if (res) {
             setCurrentUser(res);
@@ -33,10 +33,10 @@ function App() {
     }
   }, []);
 
-  function handleSignUp(userData) {
-    register(userData)
+  function handleSignUp(email, password, name) {
+    MainApi.signUp(email, password, name)
       .then((user) => {
-        if (user.data._id) {
+        if (user._id) {
           setIsSuccess(true);
         } else {
           setIsSuccess(false);
@@ -50,19 +50,12 @@ function App() {
       });
   }
 
-  function handleLogin(userData) {
-    authenticate(userData)
-      .then((user) => {
-        if (user.token) {
-          localStorage.setItem("jwt", user.token);
-          validateToken(user.token).then((res) => {
-            if (res) {
-              setCurrentUser(res);
-              setIsLoggedIn(true);
-              closeAllPopups();
-            }
-          });
-        }
+  function handleLogin(email, password) {
+    MainApi.signIn(email, password)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsLoggedIn(true);
+        closeAllPopups();
       })
       .catch(() => {
         setIsLoggedIn(false);
@@ -72,6 +65,8 @@ function App() {
   function handleLogout() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setCurrentUser({});
+    closeAllPopups();
   }
 
   function handleSignUpClick() {
