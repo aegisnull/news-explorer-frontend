@@ -28,7 +28,6 @@ function Main(props) {
           keyword: searchInput,
         }));
         setNews(newsWithQuery);
-        console.log(newsWithQuery);
       })
       .finally(() => {
         setIsLoading(false);

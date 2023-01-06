@@ -42,8 +42,8 @@ function Card(props) {
   function deleteArticle() {
     const jwt = localStorage.getItem("jwt");
     MainApi.deleteArticle(jwt, props.id)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        console.log("Article deleted");
       })
       .then(() => {
         window.location.reload();

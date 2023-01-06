@@ -64,7 +64,6 @@ function Card(props) {
       // Check if there is an article with the same title in the database
       MainApi.compareArticles(jwt, props.title)
         .then((res) => {
-          console.log(res);
           if (res.message === "Article not found") {
             MainApi.saveArticle(jwt, {
               keyword: props.keyword,
@@ -75,8 +74,8 @@ function Card(props) {
               link: props.url,
               image: props.urlToImage,
             })
-              .then((res) => {
-                console.log(res);
+              .then(() => {
+                console.log("Article saved");
               })
               .catch((err) => {
                 console.log(err);
@@ -89,8 +88,8 @@ function Card(props) {
     } else {
       // If the card is saved, delete it from the saved articles
       MainApi.deleteArticle(jwt, props.id)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          console.log("Article deleted");
         })
         .catch((err) => {
           console.log(err);
