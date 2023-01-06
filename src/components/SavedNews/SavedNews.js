@@ -11,11 +11,13 @@ function SavedNews(props) {
   const [savedNews, setSavedNews] = React.useState([]);
 
   React.useEffect(() => {
-    getSavedArticles();
+    const jwt = localStorage.getItem("jwt");
+
+    getSavedArticles(jwt);
   }, []);
 
-  function getSavedArticles() {
-    MainApi.getSavedArticles()
+  function getSavedArticles(jwt) {
+    MainApi.getSavedArticles(jwt)
       .then((res) => {
         setSavedNews(res);
       })

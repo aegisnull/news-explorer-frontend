@@ -9,15 +9,16 @@ function SavedCards() {
   return (
     <>
       <div className="cards-container cards-container_saved">
-        {savedNews.map((news) => (
+        {savedNews.map((savedNews, index) => (
           <Card
-            key={news.id}
-            url={news.url}
-            urlToImage={news.urlToImage}
-            publishedAt={news.publishedAt}
-            title={news.title}
-            content={news.content}
-            source={news.source}
+            title={savedNews.title}
+            urlToImage={savedNews.image}
+            url={savedNews.link}
+            publishedAt={savedNews.date}
+            content={savedNews.text}
+            source={savedNews.source}
+            keyword={savedNews.keyword}
+            key={index}
           />
         ))}
       </div>
@@ -39,7 +40,13 @@ function Card(props) {
       >
         <img className="card__image" src={props.urlToImage} alt={props.title} />
         <div className="card__container">
-          <p className="card__date">{props.publishedAt}</p>
+          <p className="card__date">
+            {new Date(props.publishedAt).toLocaleDateString("es-MX", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
           <h3 className="card__title">{props.title}</h3>
           <p className="card__text">{props.content}</p>
           <p className="card__publisher">{props.source}</p>
