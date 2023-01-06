@@ -27,10 +27,26 @@ function SavedCards() {
 }
 
 function Card(props) {
+  function showTooltip(cardElement) {
+    const tooltip = cardElement.querySelector(".card__hover-text");
+    tooltip.classList.toggle("card__hover-text_active");
+  }
+
+  function handleCardHover(event) {
+    if (!props.isLoggedIn) {
+      showTooltip(event.currentTarget);
+    }
+  }
+
   return (
-    <article className="card">
+    <article
+      className="card"
+      onMouseEnter={handleCardHover}
+      onMouseLeave={handleCardHover}
+    >
       <button className="card__trash-button" />
       <button className="card__keyword-button"></button>
+      <div className="card__keyword-container">{props.keyword}</div>
       <button className="card__hover-text">Remove from saved</button>
       <a
         href={props.url}
