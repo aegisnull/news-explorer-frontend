@@ -66,7 +66,6 @@ class MainApiClass {
             "Content-Type": "application/json",
             authorization: `Bearer ${localStorage.getItem("jwt")}`,
           };
-          console.log(data);
         }
         return data;
       })
