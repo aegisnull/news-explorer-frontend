@@ -4,6 +4,14 @@
 const BaseUrl = "https://api.aegisnews.students.nomoredomainssbs.ru";
 const Headers = { "Content-Type": "application/json" };
 
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
+}
+
 function register(user) {
   return fetch(`${BaseUrl  }/signup`, {
     headers: Headers,
@@ -32,13 +40,6 @@ function validateToken(token) {
     headers: { ...Headers, Authorization: `Bearer ${  token}` },
     method: "GET",
   }).then(checkResponse);
-}
-
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
 }
 
 function saveNews(token, news) {
