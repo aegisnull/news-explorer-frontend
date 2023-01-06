@@ -66,6 +66,7 @@ class MainApiClass {
             "Content-Type": "application/json",
             authorization: `Bearer ${localStorage.getItem("jwt")}`,
           };
+          console.log(data);
         }
         return data;
       })
@@ -102,6 +103,19 @@ class MainApiClass {
         "Content-Type": "application/json",
         authorization: `Bearer ${jwt}`,
       },
+    }).then((res) => {
+      return res.json();
+    });
+  }
+
+  compareArticles(jwt, title) {
+    return fetch(`${this._url}/articles/compare`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify({ title }),
     }).then((res) => {
       return res.json();
     });

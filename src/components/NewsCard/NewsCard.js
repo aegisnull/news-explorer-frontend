@@ -82,28 +82,36 @@ function Card(props) {
     // on click toggle the isSaved state
     setIsSaved(!isSaved);
 
-    // if the card is saved, delete it from the saved articles
-    if (isSaved) {
-      MainApi.deleteArticle(jwt, props.id)
+    // If the card is not saved, save it to the saved articles
+    if (!isSaved) {
+      // Check if there is an article with the same title in the database
+      MainApi.compareArticles(jwt, props.title)
         .then((res) => {
           console.log(res);
+          if (res.message === "Article not found") {
+            MainApi.saveArticle(jwt, {
+              keyword: props.keyword,
+              title: props.title,
+              text: props.content,
+              date: props.publishedAt,
+              source: props.source,
+              link: props.url,
+              image: props.urlToImage,
+            })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         })
         .catch((err) => {
           console.log(err);
         });
-    }
-
-    // if the card is not saved, save it to the saved articles
-    else {
-      MainApi.saveArticle(jwt, {
-        keyword: props.keyword,
-        title: props.title,
-        text: props.content,
-        date: props.publishedAt,
-        source: props.source,
-        link: props.url,
-        image: props.urlToImage,
-      })
+    } else {
+      // If the card is saved, delete it from the saved articles
+      MainApi.deleteArticle(jwt, props.id)
         .then((res) => {
           console.log(res);
         })
@@ -123,39 +131,6 @@ function Card(props) {
       showTooltip(event.currentTarget);
     }
   }
-
-  /* function handleSaveClick() {
-    const jwt = localStorage.getItem("jwt");
-    const cardElement = cardRef.current;
-    const saveButton = cardElement.querySelector(".card__save-button");
-    saveButton.classList.toggle("card__save-button_saved");
-
-    if (saveButton.classList.contains("card__save-button_saved")) {
-      MainApi.saveArticle(jwt, {
-        keyword: props.keyword,
-        title: props.title,
-        text: props.content,
-        date: props.publishedAt,
-        source: props.source,
-        link: props.url,
-        image: props.urlToImage,
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      MainApi.deleteArticle(jwt, props.id)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  } */
 
   return (
     <article
