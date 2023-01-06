@@ -6,7 +6,6 @@ import MainApi from "../../utils/MainApi";
 
 function NewsCard(props) {
   const news = React.useContext(NewsContext);
-
   const [cardsDisplayed, setCardsDisplayed] = React.useState(3);
 
   function handleViewMoreClick() {
