@@ -5,6 +5,15 @@ import { NewsContext } from "../../contexts/NewsContext";
 function SavedNewsHeader() {
   const savedNews = React.useContext(NewsContext);
 
+  const allKeywords = [
+    ...new Set(savedNews.map((savedNews) => savedNews.keyword)),
+  ];
+  const displayKeywords = allKeywords.slice(0, 2);
+  const remainingKeywords = allKeywords.length - displayKeywords.length;
+  const keywordsString =
+    displayKeywords.join(", ") +
+    (remainingKeywords > 0 ? `, y ${remainingKeywords} más` : "");
+
   return (
     <section className="saved-news-header">
       <div className="saved-news-header__container">
@@ -15,7 +24,7 @@ function SavedNewsHeader() {
         <p className="saved-news-header__keywords">
           Palabras clave:{" "}
           <span className="saved-news-header__keywords_bold">
-            Naturaleza, Yellowstone, y 2 más
+            {keywordsString}
           </span>
         </p>
       </div>
