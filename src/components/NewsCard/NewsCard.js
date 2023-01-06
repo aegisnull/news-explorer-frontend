@@ -7,21 +7,11 @@ import MainApi from "../../utils/MainApi";
 function NewsCard(props) {
   const news = React.useContext(NewsContext);
 
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const cardsPerPage = 6;
-  const maxPage = Math.ceil(news.length / cardsPerPage);
+  const [cardsDisplayed, setCardsDisplayed] = React.useState(3);
 
-  const handleNextPage = () => {
-    if (currentPage < maxPage) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  function handleViewMoreClick() {
+    setCardsDisplayed(cardsDisplayed + 3);
+  }
 
   if (news.length === 0) {
     return <NoResults />;
@@ -31,38 +21,26 @@ function NewsCard(props) {
     <>
       <h1 className="cards-section-title">Resultados de la búsqueda</h1>
       <div className="cards-container">
-        {news
-          .slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
-          .map((news, index) => (
-            <Card
-              title={news.title}
-              urlToImage={news.urlToImage}
-              url={news.url}
-              publishedAt={news.publishedAt}
-              content={news.content}
-              source={news.source.name}
-              keyword={news.keyword}
-              key={index}
-              isLoggedIn={props.isLoggedIn}
-            />
-          ))}
+        {news.slice(0, cardsDisplayed).map((news, index) => (
+          <Card
+            title={news.title}
+            urlToImage={news.urlToImage}
+            url={news.url}
+            publishedAt={news.publishedAt}
+            content={news.content}
+            source={news.source.name}
+            keyword={news.keyword}
+            key={index}
+            isLoggedIn={props.isLoggedIn}
+          />
+        ))}
         <div className="cards-container__view-more-container">
-          {currentPage > 1 ? (
-            <button
-              className="cards-container__view-more"
-              onClick={handlePrevPage}
-            >
-              Ver anteriores
-            </button>
-          ) : null}
-          {currentPage < maxPage ? (
-            <button
-              className="cards-container__view-more"
-              onClick={handleNextPage}
-            >
-              Ver más
-            </button>
-          ) : null}
+          <button
+            className="cards-container__view-more"
+            onClick={handleViewMoreClick}
+          >
+            Ver más
+          </button>
         </div>
       </div>
     </>
