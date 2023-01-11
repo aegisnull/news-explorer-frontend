@@ -73,7 +73,7 @@ function Header(props) {
                     className={`${buttonColor} header__text header__text_dropdown ${logOutIcon} `}
                     onClick={props.letLogOut}
                   >
-                    {currentUser.data.name}
+                    {currentUser.name}
                   </button>
                 </>
               ) : (
