@@ -1,9 +1,11 @@
 import React from "react";
 import "./SavedNewsHeader.scss";
 import { NewsContext } from "../../contexts/NewsContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SavedNewsHeader() {
   const savedNews = React.useContext(NewsContext);
+  const currentUser = React.useContext(CurrentUserContext);
 
   const allKeywords = [
     ...new Set(savedNews.map((savedNews) => savedNews.keyword)),
@@ -19,7 +21,7 @@ function SavedNewsHeader() {
       <div className="saved-news-header__container">
         <h2 className="saved-news-header__title">Artículos guardados</h2>
         <p className="saved-news-header__subtitle">
-          Elise, tienes {savedNews.length} artículos guardados
+          {currentUser.name}, tienes {savedNews.length} artículos guardados
         </p>
         <p className="saved-news-header__keywords">
           Palabras clave:{" "}
