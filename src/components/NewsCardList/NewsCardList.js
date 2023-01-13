@@ -8,7 +8,11 @@ import { useLocation } from "react-router-dom";
 function NewsCardList(props) {
   const currentPath = useLocation().pathname;
   const cardComponent =
-    currentPath === "/saved-news" ? <SavedCards /> : <NewsCard />;
+    currentPath === "/saved-news" ? (
+      <SavedCards />
+    ) : (
+      <NewsCard isLoggedIn={props.isLoggedIn} />
+    );
 
   return (
     <section className="news-card-list">

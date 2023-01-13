@@ -1,15 +1,12 @@
 import React from "react";
 import "./About.scss";
+import Avatar from "../../images/avatar.webp";
 
 function About() {
   return (
     <section className="about">
       <div className="about__container">
-        <img
-          className="about__avatar"
-          src="https://avatars.githubusercontent.com/u/27663011?v=4"
-          alt="Avatar"
-        />
+        <img className="about__avatar" src={Avatar} alt="Avatar" />
         <div className="about__info">
           <h1 className="about__title">Acerca del autor</h1>
           <p className="about__text">

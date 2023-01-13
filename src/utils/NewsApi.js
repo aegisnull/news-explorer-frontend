@@ -24,7 +24,15 @@ async function getNews(keyword) {
         return res.json();
       }
     })
-    .then((data) => data.articles);
+    .then((data) => {
+      return data.articles;
+    }
+    )
+    .catch((error) => {
+      console.error(error);
+    }
+    );
+    
 }
 
 export default getNews;
