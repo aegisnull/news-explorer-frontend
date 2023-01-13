@@ -1,5 +1,8 @@
 # NewsExplorer Frontend
 
+![App Preview](https://user-images.githubusercontent.com/27663011/212429268-38a790be-a69f-4219-b336-2d709a7038b9.gif)
+
+
 NewsExplorer es un servicio que permite buscar noticias por palabra clave y guardarlas en tu cuenta personal.
 
 ## Índice
