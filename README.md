@@ -45,5 +45,5 @@ Los comandos para ejecutar el proyecto en modo de desarrollo y producción:
 ## Enlaces
 
 - [Repositorio con código backend](https://github.com/aegisnull/news-explorer-backend)
-- [Sitio web](https://aegisnews.students.nomoredomainssbs.ru)
-- [API](https://api.aegisnews.students.nomoredomainssbs.ru)
+- [Sitio web](http://news-explorer.projects.luistellez.com)
+- [API](http://api.news-explorer.projects.luistellez.com)
