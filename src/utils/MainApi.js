@@ -1,6 +1,5 @@
 const MainApiConfig = {
-  baseUrl: "https://api.aegisnews.students.nomoredomainssbs.ru",
-  //baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.news-explorer.projects.luistellez.com",
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem("jwt")}`,
