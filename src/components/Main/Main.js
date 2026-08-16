@@ -11,23 +11,24 @@ import getNews from "../../utils/NewsApi";
 function Main(props) {
   const [isSearching, setIsSearching] = React.useState(false);
   const [news, setNews] = React.useState([]);
-  const [searchInput, setSearchInput] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  function handleSearchSubmit() {
+  function handleSearchSubmit(keyword) {
     setIsSearching(true);
-    getNewsObject();
-  }
-
-  function getNewsObject() {
     setIsLoading(true);
-    getNews(searchInput)
+    getNews(keyword)
       .then((res) => {
-        const newsWithQuery = res.map((item) => ({
-          ...item,
-          keyword: searchInput,
-        }));
-        setNews(newsWithQuery);
+        const articles = Array.isArray(res) ? res : [];
+        setNews(
+          articles.map((item) => ({
+            ...item,
+            keyword,
+          }))
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+        setNews([]);
       })
       .finally(() => {
         setIsLoading(false);
@@ -48,18 +49,13 @@ function Main(props) {
             Encuentra las últimas noticias sobre cualquier tema y guárdalas en
             tu cuenta personal.
           </p>
-          <SearchForm
-            onSearch={handleSearchSubmit}
-            setSearchInput={setSearchInput}
-          />
+          <SearchForm onSearch={handleSearchSubmit} />
         </div>
       </section>
       <NewsContext.Provider value={news}>
         {isSearching ? (
           <NewsCardList isLoading={isLoading} isLoggedIn={props.isLoggedIn} />
-        ) : (
-          ""
-        )}
+        ) : null}
       </NewsContext.Provider>
       <About />
       <Footer />

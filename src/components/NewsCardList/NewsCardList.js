@@ -9,7 +9,7 @@ function NewsCardList(props) {
   const currentPath = useLocation().pathname;
   const cardComponent =
     currentPath === "/saved-news" ? (
-      <SavedCards />
+      <SavedCards onDeleteArticle={props.onDeleteArticle} />
     ) : (
       <NewsCard isLoggedIn={props.isLoggedIn} />
     );

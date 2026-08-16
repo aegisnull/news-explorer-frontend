@@ -129,6 +129,15 @@
   &__blue {
     color: #2f71e5;
   }
+
+  &__input-error {
+    color: #ff0000;
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 8px;
+    min-height: 15px;
+  }
 }
 
 $breakpoint-mobile: 500px;

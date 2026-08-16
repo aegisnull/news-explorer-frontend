@@ -15,7 +15,9 @@ function PopupWithForm(props) {
       >
         <button
           className="popup__close-button"
+          type="button"
           onClick={props.onClose}
+          aria-label="Cerrar"
         ></button>
 
         <form
@@ -25,13 +27,22 @@ function PopupWithForm(props) {
         >
           <h2 className="popup__title">{props.title}</h2>
           {props.children}
+          {props.error ? (
+            <span className="popup__input-error">{props.error}</span>
+          ) : null}
           <button className="popup__submit-button" type="submit">
             {props.buttonText}
           </button>
         </form>
-        <button className="popup__link" onClick={props.onRegister}>
-          o <span className="popup__blue">inscribirse</span>
-        </button>
+        {props.onRedirect ? (
+          <button
+            className="popup__link"
+            type="button"
+            onClick={props.onRedirect}
+          >
+            o <span className="popup__blue">{props.redirectText}</span>
+          </button>
+        ) : null}
       </div>
     </div>
   );

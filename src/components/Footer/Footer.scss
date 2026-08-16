@@ -24,6 +24,12 @@
     padding-right: 42px;
   }
 
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
   &__socials {
     display: flex;
     gap: 27.9px;

@@ -2,8 +2,11 @@ import React from "react";
 
 function SuccessPopup(props) {
   function handleLinkClick() {
-    props.onClose();
-    props.isSignInPopupOpen(true);
+    if (props.isSuccess) {
+      props.openSignIn();
+    } else {
+      props.openSignUp();
+    }
   }
 
   return (
@@ -16,15 +19,17 @@ function SuccessPopup(props) {
             ? "¡El registro se ha completado con éxito!"
             : "Ooops, algo salió mal"}
         </h2>
-        <label
+        <button
+          type="button"
           onClick={handleLinkClick}
-          className="popup__label popup__label_success"
+          className="popup__label popup__label_success popup__link"
         >
-          Inscribirse
-        </label>
+          {props.isSuccess ? "Iniciar sesión" : "Intentar de nuevo"}
+        </button>
         <button
           className="popup__close-button"
           type="button"
+          aria-label="Cerrar"
           onClick={props.onClose}
         ></button>
       </div>

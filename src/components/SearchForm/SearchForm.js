@@ -2,9 +2,15 @@ import React from "react";
 import "./SearchForm.scss";
 
 function SearchForm(props) {
+  const [keyword, setKeyword] = React.useState("");
+
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSearch();
+    const trimmedKeyword = keyword.trim();
+    if (!trimmedKeyword) {
+      return;
+    }
+    props.onSearch(trimmedKeyword);
   }
 
   return (
@@ -13,9 +19,14 @@ function SearchForm(props) {
         type="text"
         className="search-form__input"
         placeholder="Introduce un tema"
-        onChange={(e) => props.setSearchInput(e.target.value)}
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        required
+        minLength={2}
       />
-      <button className="search-form__button">Buscar</button>
+      <button className="search-form__button" type="submit">
+        Buscar
+      </button>
     </form>
   );
 }
