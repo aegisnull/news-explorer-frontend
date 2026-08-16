@@ -19,7 +19,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ### Prerrequisitos
 
-- [Node.js](https://nodejs.org/) 20.9+
+- [Node.js](https://nodejs.org/) 24.x
 - [Next.js](https://nextjs.org/)
 - [React](https://react.dev/)
 - [SASS](https://sass-lang.com/)
