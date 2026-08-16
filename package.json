@@ -2,32 +2,33 @@
   "name": "news-explorer-frontend",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "start": "next dev",
+    "build": "next build",
+    "serve": "serve -s out -l 1026",
+    "test": "jest",
+    "lint": "eslint .",
+    "predeploy": "next build",
+    "deploy": "gh-pages -d out"
+  },
   "dependencies": {
+    "next": "^16.3.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sass": "^1.102.0"
+  },
+  "devDependencies": {
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.4",
-    "react-scripts": "5.0.1",
-    "sass": "^1.102.0",
-    "web-vitals": "^6.1.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "serve": "serve -s build -l 1026"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.1",
+    "gh-pages": "^6.3.0",
+    "jest": "^30.4.1",
+    "jest-environment-jsdom": "^30.4.1",
+    "serve": "^14.2.6"
   },
   "browserslist": {
     "production": [
@@ -40,12 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.32.0",
-    "gh-pages": "^6.3.0",
-    "serve": "^14.2.6"
   }
 }

@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
 import "./Footer.scss";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import GithubLogo from "../../images/github__logo.svg";
 import FacebookLogo from "../../images/facebook__logo.svg";
 
@@ -13,7 +15,7 @@ function Footer() {
         </p>
         <nav className="footer__nav">
           <div className="footer__links">
-            <Link to="/" className="footer__link">
+            <Link href="/" className="footer__link">
               Inicio
             </Link>
             <a

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import "./SavedNewsHeader.scss";
 import { NewsContext } from "../../contexts/NewsContext";

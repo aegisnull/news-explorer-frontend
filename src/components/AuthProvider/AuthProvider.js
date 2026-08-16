@@ -1,16 +1,14 @@
-import Main from "./components/Main/Main";
-import SavedNews from "./components/SavedNews/SavedNews";
-import { Routes, Route, Navigate } from "react-router-dom";
-import SignInPopup from "./components/PopupWithForm/SignInPopup";
-import SignUpPopup from "./components/PopupWithForm/SignUpPopup";
-import SuccessPopup from "./components/PopupWithForm/SuccessPopup";
-import React from "react";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import { CurrentUserContext } from "./contexts/CurrentUserContext";
-import MainApi from "./utils/MainApi";
-import "./App.css";
+"use client";
 
-function App() {
+import React from "react";
+import SignInPopup from "../PopupWithForm/SignInPopup";
+import SignUpPopup from "../PopupWithForm/SignUpPopup";
+import SuccessPopup from "../PopupWithForm/SuccessPopup";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import MainApi from "../../utils/MainApi";
+
+function AuthProvider({ children }) {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
   const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
@@ -21,28 +19,41 @@ function App() {
   const [authError, setAuthError] = React.useState("");
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) {
-      setIsAuthChecked(true);
-      return;
-    }
+    let cancelled = false;
 
-    MainApi.validateToken(jwt)
-      .then((res) => {
-        if (res) {
+    async function restoreSession() {
+      const jwt = localStorage.getItem("jwt");
+      if (!jwt) {
+        if (!cancelled) {
+          setIsAuthChecked(true);
+        }
+        return;
+      }
+
+      try {
+        const res = await MainApi.validateToken(jwt);
+        if (!cancelled && res) {
           setCurrentUser(res);
           setIsLoggedIn(true);
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error(err);
         localStorage.removeItem("jwt");
-        setIsLoggedIn(false);
-        setCurrentUser({});
-      })
-      .finally(() => {
-        setIsAuthChecked(true);
-      });
+        if (!cancelled) {
+          setIsLoggedIn(false);
+          setCurrentUser({});
+        }
+      } finally {
+        if (!cancelled) {
+          setIsAuthChecked(true);
+        }
+      }
+    }
+
+    restoreSession();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   function handleSignUp(email, password, name) {
@@ -95,12 +106,12 @@ function App() {
     setSuccessPopupOpen(false);
   }
 
-  const closeAllPopups = React.useCallback(() => {
+  function closeAllPopups() {
     setSignInPopupOpen(false);
     setSignUpPopupOpen(false);
     setSuccessPopupOpen(false);
     setAuthError("");
-  }, []);
+  }
 
   React.useEffect(() => {
     const isAnyPopupOpen =
@@ -112,13 +123,19 @@ function App() {
 
     function closeByEsc(evt) {
       if (evt.key === "Escape") {
-        closeAllPopups();
+        setSignInPopupOpen(false);
+        setSignUpPopupOpen(false);
+        setSuccessPopupOpen(false);
+        setAuthError("");
       }
     }
 
     function closeByOverlay(evt) {
       if (evt.target.classList.contains("popup")) {
-        closeAllPopups();
+        setSignInPopupOpen(false);
+        setSignUpPopupOpen(false);
+        setSuccessPopupOpen(false);
+        setAuthError("");
       }
     }
 
@@ -128,65 +145,46 @@ function App() {
       document.removeEventListener("keydown", closeByEsc);
       document.removeEventListener("click", closeByOverlay);
     };
-  }, [isSignInPopupOpen, isSignUpPopupOpen, isSuccessPopupOpen, closeAllPopups]);
+  }, [isSignInPopupOpen, isSignUpPopupOpen, isSuccessPopupOpen]);
+
+  const authValue = {
+    isLoggedIn,
+    isAuthChecked,
+    currentUser,
+    onSignInClick: handleSignInClick,
+    letLogOut: handleLogout,
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <SignInPopup
-          isOpen={isSignInPopupOpen}
-          onClose={closeAllPopups}
-          onRegister={handleSignUpClick}
-          onSubmit={handleLogin}
-          error={authError}
-        />
-        <SignUpPopup
-          isOpen={isSignUpPopupOpen}
-          onClose={closeAllPopups}
-          isRegisterOpen
-          onSignIn={handleSignInClick}
-          onSubmit={handleSignUp}
-        />
-
-        <SuccessPopup
-          isOpen={isSuccessPopupOpen}
-          onClose={closeAllPopups}
-          isSuccess={isSuccess}
-          openSignIn={handleSignInClick}
-          openSignUp={handleSignUpClick}
-        />
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                onSignInClick={handleSignInClick}
-                isLoggedIn={isLoggedIn}
-                letLogOut={handleLogout}
-              />
-            }
+      <AuthContext.Provider value={authValue}>
+        <div className="App">
+          <SignInPopup
+            isOpen={isSignInPopupOpen}
+            onClose={closeAllPopups}
+            onRegister={handleSignUpClick}
+            onSubmit={handleLogin}
+            error={authError}
           />
-          <Route
-            path="/saved-news"
-            element={
-              <ProtectedRoute
-                isLoggedIn={isLoggedIn}
-                isAuthChecked={isAuthChecked}
-              >
-                <SavedNews
-                  onSignInClick={handleSignInClick}
-                  isLoggedIn={isLoggedIn}
-                  letLogOut={handleLogout}
-                />
-              </ProtectedRoute>
-            }
+          <SignUpPopup
+            isOpen={isSignUpPopupOpen}
+            onClose={closeAllPopups}
+            isRegisterOpen
+            onSignIn={handleSignInClick}
+            onSubmit={handleSignUp}
           />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </div>
+          <SuccessPopup
+            isOpen={isSuccessPopupOpen}
+            onClose={closeAllPopups}
+            isSuccess={isSuccess}
+            openSignIn={handleSignInClick}
+            openSignUp={handleSignUpClick}
+          />
+          {children}
+        </div>
+      </AuthContext.Provider>
     </CurrentUserContext.Provider>
   );
 }
 
-export default App;
+export default AuthProvider;

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { NewsContext } from "../../contexts/NewsContext";
 import "./NewsCard.scss";
@@ -6,11 +8,15 @@ import MainApi from "../../utils/MainApi";
 
 function NewsCard(props) {
   const news = React.useContext(NewsContext);
+  const newsKey =
+    Array.isArray(news) && news.length ? news[0].url || news[0].title : "empty";
   const [cardsDisplayed, setCardsDisplayed] = React.useState(3);
+  const [currentNewsKey, setCurrentNewsKey] = React.useState(newsKey);
 
-  React.useEffect(() => {
+  if (currentNewsKey !== newsKey) {
+    setCurrentNewsKey(newsKey);
     setCardsDisplayed(3);
-  }, [news]);
+  }
 
   function handleViewMoreClick() {
     setCardsDisplayed((prev) => prev + 3);

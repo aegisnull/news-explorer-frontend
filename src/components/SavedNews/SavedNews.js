@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import "./SavedNews.scss";
 import Header from "../Header/Header";
@@ -7,7 +9,7 @@ import Footer from "../Footer/Footer";
 import MainApi from "../../utils/MainApi";
 import { NewsContext } from "../../contexts/NewsContext";
 
-function SavedNews(props) {
+function SavedNews() {
   const [savedNews, setSavedNews] = React.useState([]);
 
   React.useEffect(() => {
@@ -42,11 +44,7 @@ function SavedNews(props) {
 
   return (
     <section className="saved-news">
-      <Header
-        onSignInClick={props.onSignInClick}
-        isLoggedIn={props.isLoggedIn}
-        letLogOut={props.letLogOut}
-      />
+      <Header />
       <NewsContext.Provider value={savedNews}>
         <SavedNewsHeader />
         <section className="news__container">

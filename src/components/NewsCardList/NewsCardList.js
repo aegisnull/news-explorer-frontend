@@ -1,12 +1,14 @@
+"use client";
+
 import React from "react";
 import "./NewsCardList.scss";
 import Preloader from "../Preloader/Preloader";
 import NewsCard from "../NewsCard/NewsCard";
 import SavedCards from "../NewsCard/SavedCards";
-import { useLocation } from "react-router-dom";
+import { usePathname } from "next/navigation";
 
 function NewsCardList(props) {
-  const currentPath = useLocation().pathname;
+  const currentPath = usePathname();
   const cardComponent =
     currentPath === "/saved-news" ? (
       <SavedCards onDeleteArticle={props.onDeleteArticle} />

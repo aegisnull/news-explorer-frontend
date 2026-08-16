@@ -16,3 +16,7 @@ a:-webkit-any-link {
   text-decoration: none;
   color: inherit;
 }
+
+.App {
+  text-align: center;
+}

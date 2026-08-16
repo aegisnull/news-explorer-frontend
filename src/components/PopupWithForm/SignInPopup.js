@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
@@ -5,6 +7,14 @@ import "./PopupWithForm.scss";
 
 function SignInPopup(props) {
   const [inputs, setInputs] = React.useState({});
+  const [isOpen, setIsOpen] = React.useState(props.isOpen);
+
+  if (isOpen !== props.isOpen) {
+    setIsOpen(props.isOpen);
+    if (!props.isOpen) {
+      setInputs({});
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,12 +27,6 @@ function SignInPopup(props) {
       [evt.target.name]: evt.target.value,
     });
   }
-
-  React.useEffect(() => {
-    if (!props.isOpen) {
-      setInputs({});
-    }
-  }, [props.isOpen]);
 
   return (
     <PopupWithForm
