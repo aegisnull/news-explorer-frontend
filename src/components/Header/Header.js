@@ -1,17 +1,22 @@
+"use client";
+
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "../../images/logo.svg";
 import LightLogo from "../../images/logo_light.svg";
 import MobileMenuDark from "../../images/mobile-header_dark.svg";
 import MobileMenuLight from "../../images/mobile-header_light.svg";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 import "./Header.scss";
 
-function Header(props) {
+function Header() {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const { isLoggedIn, letLogOut, onSignInClick } = useAuth();
 
-  const currentPath = useLocation().pathname;
+  const currentPath = usePathname();
   const isSavedNews = currentPath === "/saved-news";
   const logoPath = isSavedNews && !menuOpen ? LightLogo : Logo;
   const textColor = isSavedNews ? "header__link_light" : "";
@@ -30,7 +35,7 @@ function Header(props) {
   return (
     <header className="header">
       <div className="header__container">
-        <Link to="/">
+        <Link href="/">
           <div className="header__logo">
             <img src={logoPath} alt="NewsExplorer Logo" />
           </div>
@@ -53,16 +58,16 @@ function Header(props) {
               </button>
             </nav>
             <div className="dropdown">
-              <Link to="/">
+              <Link href="/">
                 <div
                   className={`header__link header__text header__link_dropdown1 `}
                 >
                   Inicio
                 </div>
               </Link>
-              {props.isLoggedIn ? (
+              {isLoggedIn ? (
                 <>
-                  <Link to="/saved-news">
+                  <Link href="/saved-news">
                     <div
                       className={`header__link header__text ${textColor} header__link_dropdown2`}
                     >
@@ -72,7 +77,7 @@ function Header(props) {
                   <button
                     type="button"
                     className={`${buttonColor} header__text header__text_dropdown ${logOutIcon} `}
-                    onClick={props.letLogOut}
+                    onClick={letLogOut}
                   >
                     {currentUser.name}
                   </button>
@@ -81,7 +86,7 @@ function Header(props) {
                 <button
                   type="button"
                   className={`${buttonColor} header__text header__text_dropdown `}
-                  onClick={props.onSignInClick}
+                  onClick={onSignInClick}
                 >
                   Iniciar sesión
                 </button>
@@ -90,14 +95,14 @@ function Header(props) {
           </>
         ) : (
           <nav className="header__nav">
-            <Link to="/">
+            <Link href="/">
               <div className={`header__link header__text ${textColor}`}>
                 Inicio
               </div>
             </Link>
-            {props.isLoggedIn ? (
+            {isLoggedIn ? (
               <>
-                <Link to="/saved-news">
+                <Link href="/saved-news">
                   <div className={`header__link header__text ${textColor}`}>
                     Artículos guardados
                   </div>
@@ -105,7 +110,7 @@ function Header(props) {
                 <button
                   type="button"
                   className={`${buttonColor} header__text ${logOutIcon}`}
-                  onClick={props.letLogOut}
+                  onClick={letLogOut}
                 >
                   {currentUser.name}
                 </button>
@@ -127,7 +132,7 @@ function Header(props) {
                 <button
                   type="button"
                   className={`${buttonColor} header__text `}
-                  onClick={props.onSignInClick}
+                  onClick={onSignInClick}
                 >
                   Iniciar sesión
                 </button>

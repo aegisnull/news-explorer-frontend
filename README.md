@@ -15,21 +15,16 @@ NewsExplorer es un servicio que permite buscar noticias por palabra clave y guar
 
 ## Empezando
 
-Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para fines de desarrollo y prueba. Consulte [Despliegue](#despliegue) para obtener más información sobre cómo desplegar el proyecto en GitHub Pages.
+Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para fines de desarrollo y prueba.
 
 ### Prerrequisitos
 
-Una lista de dependencias que requiere el proyecto, junto con enlaces a cualquier documentación relevante.
-
-- [React](https://reactjs.org/)
-- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+- [Node.js](https://nodejs.org/) 24.x
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
 - [SASS](https://sass-lang.com/)
-- [gh-pages](https://www.npmjs.com/package/gh-pages)
-- [eslint](https://eslint.org/)
 
 ### Instalación
-
-Instrucciones paso a paso para instalar las dependencias y configurar el proyecto:
 
 1. Clone el repositorio: `git clone https://github.com/aegisnull/news-explorer-frontend.git`
 2. Instale las dependencias: `npm install`
@@ -37,10 +32,11 @@ Instrucciones paso a paso para instalar las dependencias y configurar el proyect
 
 ## Uso
 
-Los comandos para ejecutar el proyecto en modo de desarrollo y producción:
-
-- `npm run start` - Ejecuta el proyecto en modo de desarrollo.
-- `npm run build` - Crea el proyecto en modo de producción.
+- `npm run dev` - Ejecuta el proyecto en modo de desarrollo.
+- `npm start` - Alias de `npm run dev`.
+- `npm run build` - Crea el proyecto en modo de producción (export estático en `out/`).
+- `npm run serve` - Sirve la exportación estática en el puerto 1026.
+- `npm test` - Ejecuta las pruebas.
 
 ## Enlaces
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import "./Main.scss";
 import Header from "../Header/Header";
@@ -6,9 +8,11 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import { NewsContext } from "../../contexts/NewsContext";
+import { useAuth } from "../../contexts/AuthContext";
 import getNews from "../../utils/NewsApi";
 
-function Main(props) {
+function Main() {
+  const { isLoggedIn } = useAuth();
   const [isSearching, setIsSearching] = React.useState(false);
   const [news, setNews] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -38,11 +42,7 @@ function Main(props) {
   return (
     <>
       <section className="main">
-        <Header
-          onSignInClick={props.onSignInClick}
-          isLoggedIn={props.isLoggedIn}
-          letLogOut={props.letLogOut}
-        />
+        <Header />
         <div className="main__container">
           <h1 className="main__title">¿Qué está pasando en el mundo?</h1>
           <p className="main__subtitle">
@@ -54,7 +54,7 @@ function Main(props) {
       </section>
       <NewsContext.Provider value={news}>
         {isSearching ? (
-          <NewsCardList isLoading={isLoading} isLoggedIn={props.isLoggedIn} />
+          <NewsCardList isLoading={isLoading} isLoggedIn={isLoggedIn} />
         ) : null}
       </NewsContext.Provider>
       <About />

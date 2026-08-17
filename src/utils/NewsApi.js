@@ -1,6 +1,6 @@
 const PROXY_URL = "https://nomoreparties.co/news/v2";
 const API_KEY =
-  process.env.REACT_APP_NEWS_API_KEY || "ed4390ffc54146c7a2ff5ea1673c8b01";
+  process.env.NEXT_PUBLIC_NEWS_API_KEY || "ed4390ffc54146c7a2ff5ea1673c8b01";
 
 function toIsoDate(date) {
   return date.toISOString().slice(0, 10);
