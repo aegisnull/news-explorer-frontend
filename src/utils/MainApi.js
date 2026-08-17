@@ -1,59 +1,78 @@
-const MainApiConfig = {
-  baseUrl: "https://api.news-explorer.projects.luistellez.com",
-  headers: {
+const BASE_URL = "https://api.news-explorer.projects.luistellez.com";
+
+function getHeaders(jwt) {
+  const headers = {
     "Content-Type": "application/json",
-    authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  },
-};
+  };
+  const token = jwt || localStorage.getItem("jwt");
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+  return headers;
+}
+
+function checkResponse(res) {
+  return res
+    .json()
+    .catch(() => ({}))
+    .then((data) => {
+      if (res.ok) {
+        return data;
+      }
+      const error = new Error(data.message || `Error: ${res.status}`);
+      error.status = res.status;
+      return Promise.reject(error);
+    });
+}
 
 class MainApiClass {
-  constructor(config) {
-    this._url = config.baseUrl;
-    this._headers = config.headers;
+  constructor(url) {
+    this._url = url;
   }
 
   signUp(email, password, name) {
     return fetch(`${this._url}/signup`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify({ email, password, name }),
-    })
-      .then((res) => {
-        if (res.status === 400) {
-          throw new Error("Formato de correo electrónico o contraseña incorrecto");
-        } else if (res.status === 409) {
-          throw new Error("Esta cuenta ya existe");
-        } else if (res.status !== 200) {
-          throw new Error("Ha ocurrido un error inesperado");
-        }
-        return res.json();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }).then((res) => {
+      if (res.status === 400) {
+        throw new Error(
+          "Formato de correo electrónico o contraseña incorrecto"
+        );
+      }
+      if (res.status === 409) {
+        throw new Error("Esta cuenta ya existe");
+      }
+      if (!res.ok) {
+        throw new Error("Ha ocurrido un error inesperado");
+      }
+      return res.json();
+    });
   }
 
   signIn(email, password) {
     if (!email || !password) {
-      return Promise.reject(new Error("Por favor ingresa email y contraseña válidos"));
+      return Promise.reject(
+        new Error("Por favor ingresa email y contraseña válidos")
+      );
     }
     return fetch(`${this._url}/signin`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: getHeaders(),
       body: JSON.stringify({ email, password }),
     })
       .then((res) => {
         if (res.status === 400) {
           throw new Error("Email invalido o formato de contraseña incorrecto");
-        } else if (res.status === 401) {
+        }
+        if (res.status === 401) {
           throw new Error("Email o contraseña incorrectos");
-        } else if (res.status === 404) {
+        }
+        if (res.status === 404) {
           throw new Error("Usuario no encontrado");
-        } else if (res.status !== 200) {
+        }
+        if (!res.ok) {
           throw new Error("Ha ocurrido un error inesperado");
         }
         return res.json();
@@ -61,88 +80,56 @@ class MainApiClass {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
-          this._headers = {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          };
         }
         return data;
-      })
-      .catch((error) => {
-        console.error(error);
-        return Promise.reject(error);
       });
   }
 
   validateToken(jwt) {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
-      },
+      headers: getHeaders(jwt),
     }).then((res) => {
       if (res.status === 401) {
         throw new Error("Token invalido");
-      } else if (res.status !== 200) {
+      }
+      if (!res.ok) {
         throw new Error("Ha ocurrido un error inesperado");
       }
       return res.json();
-    })
-    .catch((error) => {
-      console.error(error);
     });
   }
 
   getSavedArticles(jwt) {
     return fetch(`${this._url}/articles`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
-      },
-    }).then((res) => {
-      return res.json();
-    });
+      headers: getHeaders(jwt),
+    }).then(checkResponse);
   }
 
   compareArticles(jwt, title) {
     return fetch(`${this._url}/articles/compare`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
-      },
+      headers: getHeaders(jwt),
       body: JSON.stringify({ title }),
-    }).then((res) => {
-      return res.json();
-    });
+    }).then(checkResponse);
   }
 
   saveArticle(jwt, { keyword, title, text, date, source, link, image }) {
     return fetch(`${this._url}/articles`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
-      },
+      headers: getHeaders(jwt),
       body: JSON.stringify({ keyword, title, text, date, source, link, image }),
-    }).then((res) => {
-      return res.json();
-    });
+    }).then(checkResponse);
   }
 
   deleteArticle(jwt, id) {
     return fetch(`${this._url}/articles/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${jwt}`,
-      },
-    }).then((res) => {
-      return res.json();
-    });
+      headers: getHeaders(jwt),
+    }).then(checkResponse);
   }
 }
-const MainApi = new MainApiClass(MainApiConfig);
+
+const MainApi = new MainApiClass(BASE_URL);
 export default MainApi;

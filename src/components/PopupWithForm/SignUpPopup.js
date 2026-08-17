@@ -8,12 +8,7 @@ function SignUpPopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSubmit(
-      inputs.email,
-      inputs.password,
-      inputs.username
-    );
-    setInputs({});
+    props.onSubmit(inputs.email, inputs.password, inputs.username);
   }
 
   function handleInputChange(evt) {
@@ -23,6 +18,12 @@ function SignUpPopup(props) {
     });
   }
 
+  React.useEffect(() => {
+    if (!props.isOpen) {
+      setInputs({});
+    }
+  }, [props.isOpen]);
+
   return (
     <PopupWithForm
       name="sign-up"
@@ -31,6 +32,8 @@ function SignUpPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       isRegisterOpen={props.isRegisterOpen}
+      onRedirect={props.onSignIn}
+      redirectText="iniciar sesión"
       onSubmit={handleSubmit}
     >
       <label className="popup__label">
@@ -44,7 +47,6 @@ function SignUpPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
       </label>
       <label className="popup__label">
         Contraseña
@@ -57,7 +59,6 @@ function SignUpPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
       </label>
       <label className="popup__label">
         Nombre de usuario
@@ -70,7 +71,6 @@ function SignUpPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
       </label>
     </PopupWithForm>
   );

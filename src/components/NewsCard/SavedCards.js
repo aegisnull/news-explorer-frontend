@@ -3,54 +3,55 @@ import "./NewsCard.scss";
 import { NewsContext } from "../../contexts/NewsContext";
 import MainApi from "../../utils/MainApi";
 
-function SavedCards() {
+function SavedCards({ onDeleteArticle }) {
   const savedNews = React.useContext(NewsContext);
 
+  if (!Array.isArray(savedNews) || savedNews.length === 0) {
+    return null;
+  }
+
   return (
-    <>
-      <div className="cards-container cards-container_saved">
-        {savedNews.map((savedNews, index) => (
-          <Card
-            title={savedNews.title}
-            urlToImage={savedNews.image}
-            url={savedNews.link}
-            publishedAt={savedNews.date}
-            content={savedNews.text}
-            source={savedNews.source}
-            keyword={savedNews.keyword}
-            id={savedNews._id}
-            key={index}
-          />
-        ))}
-      </div>
-    </>
+    <div className="cards-container cards-container_saved">
+      {savedNews.map((article) => (
+        <Card
+          title={article.title}
+          urlToImage={article.image}
+          url={article.link}
+          publishedAt={article.date}
+          content={article.text}
+          source={article.source}
+          keyword={article.keyword}
+          id={article._id}
+          key={article._id || article.link}
+          onDeleteArticle={onDeleteArticle}
+        />
+      ))}
+    </div>
   );
 }
 
 function Card(props) {
   function showTooltip(cardElement) {
     const tooltip = cardElement.querySelector(".card__hover-text");
-    tooltip.classList.toggle("card__hover-text_active");
-  }
-
-  function handleCardHover(event) {
-    if (!props.isLoggedIn) {
-      showTooltip(event.currentTarget);
+    if (tooltip) {
+      tooltip.classList.toggle("card__hover-text_active");
     }
   }
 
+  function handleCardHover(event) {
+    showTooltip(event.currentTarget);
+  }
+
   function deleteArticle() {
+    if (props.onDeleteArticle) {
+      props.onDeleteArticle(props.id);
+      return;
+    }
+
     const jwt = localStorage.getItem("jwt");
-    MainApi.deleteArticle(jwt, props.id)
-      .then(() => {
-        console.log("Article deleted");
-      })
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    MainApi.deleteArticle(jwt, props.id).catch((err) => {
+      console.error(err);
+    });
   }
 
   return (
@@ -59,14 +60,20 @@ function Card(props) {
       onMouseEnter={handleCardHover}
       onMouseLeave={handleCardHover}
     >
-      <button className="card__trash-button" onClick={deleteArticle} />
-      <button className="card__keyword-button"></button>
+      <button
+        type="button"
+        className="card__trash-button"
+        onClick={deleteArticle}
+        aria-label="Eliminar artículo"
+      />
       <div className="card__keyword-container">{props.keyword}</div>
-      <button className="card__hover-text">Remove from saved</button>
+      <button type="button" className="card__hover-text">
+        Eliminar de guardados
+      </button>
       <a
         href={props.url}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="card__link"
       >
         <img className="card__image" src={props.urlToImage} alt={props.title} />

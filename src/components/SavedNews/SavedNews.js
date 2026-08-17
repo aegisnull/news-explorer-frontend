@@ -12,17 +12,31 @@ function SavedNews(props) {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+      return undefined;
+    }
 
-    getSavedArticles(jwt);
-  }, []);
-
-  function getSavedArticles(jwt) {
     MainApi.getSavedArticles(jwt)
       .then((res) => {
-        setSavedNews(res);
+        setSavedNews(Array.isArray(res) ? res : []);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        setSavedNews([]);
+      });
+    return undefined;
+  }, []);
+
+  function handleDeleteArticle(id) {
+    const jwt = localStorage.getItem("jwt");
+    return MainApi.deleteArticle(jwt, id)
+      .then(() => {
+        setSavedNews((articles) =>
+          articles.filter((article) => article._id !== id)
+        );
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -36,7 +50,7 @@ function SavedNews(props) {
       <NewsContext.Provider value={savedNews}>
         <SavedNewsHeader />
         <section className="news__container">
-          <NewsCardList />
+          <NewsCardList onDeleteArticle={handleDeleteArticle} />
         </section>
       </NewsContext.Provider>
       <Footer />

@@ -8,98 +8,130 @@ function NewsCard(props) {
   const news = React.useContext(NewsContext);
   const [cardsDisplayed, setCardsDisplayed] = React.useState(3);
 
+  React.useEffect(() => {
+    setCardsDisplayed(3);
+  }, [news]);
+
   function handleViewMoreClick() {
-    setCardsDisplayed(cardsDisplayed + 3);
+    setCardsDisplayed((prev) => prev + 3);
   }
 
-  if (news.length === 0) {
+  if (!news || news.length === 0) {
     return <NoResults />;
   }
 
   return (
     <>
-      <h1 className="cards-section-title">Resultados de la búsqueda</h1>
+      <h2 className="cards-section-title">Resultados de la búsqueda</h2>
       <div className="cards-container">
-        {news.slice(0, cardsDisplayed).map((news, index) => (
+        {news.slice(0, cardsDisplayed).map((article) => (
           <Card
-            title={news.title}
-            urlToImage={news.urlToImage}
-            url={news.url}
-            publishedAt={news.publishedAt}
-            content={news.content}
-            source={news.source.name}
-            keyword={news.keyword}
-            key={index}
+            title={article.title}
+            urlToImage={article.urlToImage}
+            url={article.url}
+            publishedAt={article.publishedAt}
+            content={article.content}
+            source={article.source.name}
+            keyword={article.keyword}
+            key={article.url || article.title}
             isLoggedIn={props.isLoggedIn}
           />
         ))}
-        <div className="cards-container__view-more-container">
-          <button
-            className="cards-container__view-more"
-            onClick={handleViewMoreClick}
-          >
-            Ver más
-          </button>
-        </div>
+        {cardsDisplayed < news.length ? (
+          <div className="cards-container__view-more-container">
+            <button
+              type="button"
+              className="cards-container__view-more"
+              onClick={handleViewMoreClick}
+            >
+              Ver más
+            </button>
+          </div>
+        ) : null}
       </div>
     </>
   );
 }
 
 function Card(props) {
-  const cardRef = React.useRef(null);
   const [isSaved, setIsSaved] = React.useState(false);
+  const [savedId, setSavedId] = React.useState(null);
 
   const cardSaveButtonClassName = `card__save-button ${
     isSaved ? "card__save-button_saved" : ""
   } `;
 
   function handleSaveClick() {
-    const jwt = localStorage.getItem("jwt");
-    // on click toggle the isSaved state
-    setIsSaved(!isSaved);
+    if (!props.isLoggedIn) {
+      return;
+    }
 
-    // If the card is not saved, save it to the saved articles
-    if (!isSaved) {
-      // Check if there is an article with the same title in the database
-      MainApi.compareArticles(jwt, props.title)
-        .then((res) => {
-          if (res.message === "Article not found") {
-            MainApi.saveArticle(jwt, {
-              keyword: props.keyword,
-              title: props.title,
-              text: props.content,
-              date: props.publishedAt,
-              source: props.source,
-              link: props.url,
-              image: props.urlToImage,
-            })
-              .then(() => {
-                console.log("Article saved");
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+    const jwt = localStorage.getItem("jwt");
+
+    if (isSaved) {
+      const resolveId = savedId
+        ? Promise.resolve(savedId)
+        : MainApi.getSavedArticles(jwt).then((articles) => {
+            const match = (Array.isArray(articles) ? articles : []).find(
+              (article) => article.title === props.title
+            );
+            return match && match._id;
+          });
+
+      resolveId
+        .then((id) => {
+          if (!id) {
+            setIsSaved(false);
+            return null;
+          }
+          return MainApi.deleteArticle(jwt, id);
+        })
+        .then((deleted) => {
+          if (deleted !== null) {
+            setIsSaved(false);
+            setSavedId(null);
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
-    } else {
-      // If the card is saved, delete it from the saved articles
-      MainApi.deleteArticle(jwt, props.id)
-        .then(() => {
-          console.log("Article deleted");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      return;
     }
+
+    const articleData = {
+      keyword: props.keyword,
+      title: props.title,
+      text: props.content || props.title || "Sin descripción",
+      date: props.publishedAt,
+      source: props.source,
+      link: props.url,
+      image: props.urlToImage || props.url,
+    };
+
+    MainApi.compareArticles(jwt, props.title)
+      .then((res) => {
+        if (res && res.message === "Article found") {
+          setIsSaved(true);
+          return null;
+        }
+        return MainApi.saveArticle(jwt, articleData);
+      })
+      .then((saved) => {
+        if (saved && saved._id) {
+          setSavedId(saved._id);
+          setIsSaved(true);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   function showTooltip(cardElement) {
     const tooltip = cardElement.querySelector(".card__hover-text");
-    tooltip.classList.toggle("card__hover-text_active");
+    if (tooltip) {
+      tooltip.classList.toggle("card__hover-text_active");
+    }
   }
 
   function handleCardHover(event) {
@@ -113,21 +145,25 @@ function Card(props) {
       className="card"
       onMouseEnter={handleCardHover}
       onMouseLeave={handleCardHover}
-      ref={cardRef}
     >
-      <button className={cardSaveButtonClassName} onClick={handleSaveClick} />
-      <button className="card__keyword-button">{props.keyword}</button>
-      {props.isLoggedIn ? (
-        <></>
-      ) : (
-        <button className="card__hover-text">
+      <button
+        type="button"
+        className={cardSaveButtonClassName}
+        onClick={handleSaveClick}
+        aria-label={isSaved ? "Eliminar de guardados" : "Guardar artículo"}
+      />
+      <button type="button" className="card__keyword-button">
+        {props.keyword}
+      </button>
+      {props.isLoggedIn ? null : (
+        <button type="button" className="card__hover-text">
           Inicia sesión para guardar artículos
         </button>
       )}
       <a
         href={props.url}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="card__link"
       >
         <img className="card__image" src={props.urlToImage} alt={props.title} />
@@ -147,4 +183,5 @@ function Card(props) {
     </article>
   );
 }
+
 export default NewsCard;

@@ -8,57 +8,69 @@ import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 import MainApi from "./utils/MainApi";
+import "./App.css";
 
 function App() {
   const [isSignInPopupOpen, setSignInPopupOpen] = React.useState(false);
   const [isSignUpPopupOpen, setSignUpPopupOpen] = React.useState(false);
   const [isSuccessPopupOpen, setSuccessPopupOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isAuthChecked, setIsAuthChecked] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [authError, setAuthError] = React.useState("");
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      MainApi.validateToken(jwt)
-        .then((res) => {
-          if (res) {
-            setCurrentUser(res);
-            setIsLoggedIn(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (!jwt) {
+      setIsAuthChecked(true);
+      return;
     }
+
+    MainApi.validateToken(jwt)
+      .then((res) => {
+        if (res) {
+          setCurrentUser(res);
+          setIsLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        localStorage.removeItem("jwt");
+        setIsLoggedIn(false);
+        setCurrentUser({});
+      })
+      .finally(() => {
+        setIsAuthChecked(true);
+      });
   }, []);
 
   function handleSignUp(email, password, name) {
     MainApi.signUp(email, password, name)
       .then((user) => {
-        if (user._id) {
-          setIsSuccess(true);
-        } else {
-          setIsSuccess(false);
-        }
+        setIsSuccess(Boolean(user && user._id));
       })
       .catch(() => {
         setIsSuccess(false);
       })
       .finally(() => {
+        setSignUpPopupOpen(false);
         setSuccessPopupOpen(true);
       });
   }
 
   function handleLogin(email, password) {
+    setAuthError("");
     MainApi.signIn(email, password)
-      .then((res) => {
-        setCurrentUser(res);
+      .then((res) => MainApi.validateToken(res.token))
+      .then((user) => {
+        setCurrentUser(user);
         setIsLoggedIn(true);
         closeAllPopups();
       })
-      .catch(() => {
+      .catch((err) => {
         setIsLoggedIn(false);
+        setAuthError(err.message || "No se pudo iniciar sesión");
       });
   }
 
@@ -70,46 +82,53 @@ function App() {
   }
 
   function handleSignUpClick() {
+    setAuthError("");
     setSignUpPopupOpen(true);
     setSignInPopupOpen(false);
-  }
-
-  function handleSuccessClick() {
-    setSuccessPopupOpen(true);
-    setSignUpPopupOpen(false);
-    setSignInPopupOpen(false);
+    setSuccessPopupOpen(false);
   }
 
   function handleSignInClick() {
+    setAuthError("");
     setSignInPopupOpen(true);
-  }
-
-  function closeAllPopups() {
-    setSignInPopupOpen(false);
     setSignUpPopupOpen(false);
     setSuccessPopupOpen(false);
   }
 
-  function closeByEsc(evt) {
-    if (evt.key === "Escape") {
-      closeAllPopups();
-    }
-  }
-
-  function closeByOverlay(evt) {
-    if (evt.target.classList.contains("popup")) {
-      closeAllPopups();
-    }
-  }
+  const closeAllPopups = React.useCallback(() => {
+    setSignInPopupOpen(false);
+    setSignUpPopupOpen(false);
+    setSuccessPopupOpen(false);
+    setAuthError("");
+  }, []);
 
   React.useEffect(() => {
+    const isAnyPopupOpen =
+      isSignInPopupOpen || isSignUpPopupOpen || isSuccessPopupOpen;
+
+    if (!isAnyPopupOpen) {
+      return undefined;
+    }
+
+    function closeByEsc(evt) {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+
+    function closeByOverlay(evt) {
+      if (evt.target.classList.contains("popup")) {
+        closeAllPopups();
+      }
+    }
+
     document.addEventListener("keydown", closeByEsc);
     document.addEventListener("click", closeByOverlay);
     return () => {
       document.removeEventListener("keydown", closeByEsc);
       document.removeEventListener("click", closeByOverlay);
     };
-  });
+  }, [isSignInPopupOpen, isSignUpPopupOpen, isSuccessPopupOpen, closeAllPopups]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -119,12 +138,13 @@ function App() {
           onClose={closeAllPopups}
           onRegister={handleSignUpClick}
           onSubmit={handleLogin}
+          error={authError}
         />
         <SignUpPopup
           isOpen={isSignUpPopupOpen}
           onClose={closeAllPopups}
           isRegisterOpen
-          onSuccess={handleSuccessClick}
+          onSignIn={handleSignInClick}
           onSubmit={handleSignUp}
         />
 
@@ -132,7 +152,8 @@ function App() {
           isOpen={isSuccessPopupOpen}
           onClose={closeAllPopups}
           isSuccess={isSuccess}
-          openSignIn={setSignInPopupOpen}
+          openSignIn={handleSignInClick}
+          openSignUp={handleSignUpClick}
         />
 
         <Routes>
@@ -149,7 +170,10 @@ function App() {
           <Route
             path="/saved-news"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                isAuthChecked={isAuthChecked}
+              >
                 <SavedNews
                   onSignInClick={handleSignInClick}
                   isLoggedIn={isLoggedIn}

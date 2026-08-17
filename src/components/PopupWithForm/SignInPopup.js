@@ -8,11 +8,7 @@ function SignInPopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSubmit(
-      inputs.email,
-      inputs.password
-    );
-    setInputs({});
+    props.onSubmit(inputs.email, inputs.password);
   }
 
   function handleInputChange(evt) {
@@ -22,6 +18,12 @@ function SignInPopup(props) {
     });
   }
 
+  React.useEffect(() => {
+    if (!props.isOpen) {
+      setInputs({});
+    }
+  }, [props.isOpen]);
+
   return (
     <PopupWithForm
       name="sign-in"
@@ -29,8 +31,10 @@ function SignInPopup(props) {
       buttonText="Iniciar sesión"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      onRegister={props.onRegister}
+      onRedirect={props.onRegister}
+      redirectText="inscribirse"
       onSubmit={handleSubmit}
+      error={props.error}
     >
       <label className="popup__label">
         Correo electrónico
@@ -43,7 +47,6 @@ function SignInPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
       </label>
       <label className="popup__label">
         Contraseña
@@ -56,7 +59,6 @@ function SignInPopup(props) {
           onChange={handleInputChange}
           required
         />
-        <span className="popup__input-error"></span>
       </label>
     </PopupWithForm>
   );

@@ -7,8 +7,9 @@ function SavedNewsHeader() {
   const savedNews = React.useContext(NewsContext);
   const currentUser = React.useContext(CurrentUserContext);
 
+  const articles = Array.isArray(savedNews) ? savedNews : [];
   const allKeywords = [
-    ...new Set(savedNews.map((savedNews) => savedNews.keyword)),
+    ...new Set(articles.map((article) => article.keyword).filter(Boolean)),
   ];
   const displayKeywords = allKeywords.slice(0, 2);
   const remainingKeywords = allKeywords.length - displayKeywords.length;
@@ -21,7 +22,7 @@ function SavedNewsHeader() {
       <div className="saved-news-header__container">
         <h2 className="saved-news-header__title">Artículos guardados</h2>
         <p className="saved-news-header__subtitle">
-          {currentUser.name}, tienes {savedNews.length} artículos guardados
+          {currentUser.name}, tienes {articles.length} artículos guardados
         </p>
         <p className="saved-news-header__keywords">
           Palabras clave:{" "}
